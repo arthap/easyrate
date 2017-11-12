@@ -1,0 +1,52 @@
+<div align="center" style="color: red" ng-show="errorResult" >{{errorResult}} </div>
+ <div class="products" ng-hide="hideSimilar">
+    <div class="title">
+        <span>Easy Rate</span>
+    </div>
+    <div class="back-to-top" scroll-to-item scroll-to="#top-scroll">
+        <div class="container" id="/" >
+            <div class="row">
+                <div class="col-md-3 col-sm-6" when-scrolled='show_more()'ng-repeat="product in getSimilarProductList">
+                    <div class="product">
+                        <div class="product-title">
+                            <span>{{product.NAME}}</span>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-image">
+                                <img src="{{product.RESOURCE}}">
+                            </div>
+                            <div class="product-desc">
+                                <span>{{product.SHORT_TEXT | limitTo:letterLimit}}... </span>
+                            </div>
+                            <div class="product-info">
+                                <div class="rate-stars"ng-init="rating = product.CURRENT_SCORE">
+                                    <span class="fa fa-star-o" ng-class="{'active': rating <= 5 && rating >4}" ></span>
+                                    <span class="fa fa-star-o" ng-class="{'active': rating <= 4 && rating >3}"></span>
+                                    <span class="fa fa-star-o" ng-class="{'active': rating <= 3 && rating >2}"></span>
+                                    <span class="fa fa-star-o" ng-class="{'active': rating <= 2 && rating >1}"></span>
+                                    <span class="fa fa-star-o" ng-class="{'active': rating <=1}"></span>
+                                </div>
+
+                                <div class="rating">
+                                    <span>{{product.CURRENT_SCORE  | round}}</span>
+                                </div>
+                            </div>
+                            <div class="product-footer">
+                                <a  ng-href="products/{{product.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">View details | </a>
+                                <a  ng-href="addReview/{{product.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">Reviews |</a>
+                                <a  ng-href="similar/{{product.PRODUCT_ID}}" role="button"  ng-click="mainPageDisable()">Similar </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show='loading'>Loading Data ...</div>
+        <a href="javascript:void(0)" class="load-more">Load More</a>
+    </div>
+
+    <div class="footer">
+        <span>Copyright © 2016 ucraft. All rights reserved.</span>
+        <span>Privacy Policy</span>
+    </div>
+</div>

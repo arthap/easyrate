@@ -1,0 +1,204 @@
+<!--<!DOCTYPE html>-->
+<!--<html class="home" lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Product review</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/perfect-scrollbar.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="/less/template.less" />-->
+		<!--<script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.jquery.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>-->
+
+		<!--<script type="text/javascript" src="../js/swiper.min.js"></script>-->
+
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="/add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="container">
+			<div class="product-item">
+				<div class="row product-block">
+					<div class="col-sm-3">
+						<div class="product-image">
+							<img src="{{mainImageUrl}}">
+						</div>
+					</div>
+
+					<div class="col-sm-9">
+						<div class="product-header">
+							<span class="product-title"><!--Americolor--> {{getProductDetail.NAME}}</span>
+							<span class="rating large"><!--4.5-->{{getProductDetail.CURRENT_SCORE}}</span>
+						</div>
+
+						<div class="product-desc">
+							<p>
+								{{getProductDetail.DESCRIPTION}}
+								<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.-->
+								<!--Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,-->
+								<!--sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget-->
+								<!--turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero volutpat, molestie magna et, scelerisque ipsum.-->
+								<!--Cras tempus sit amet libero non molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque-->
+								<!--diam, eu dapibus ipsum tempus at. Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat.-->
+								<!--Donec volutpat nisl non urna pulvinar, sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis-->
+								<!--viverra dolor, ac tempor dui ante eget turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero-->
+								<!--volutpat, molestie magna et, scelerisque ipsum. Cras tempus sit amet libero non molestie.-->
+							</p>
+						</div>
+
+						<div class="product-footer">
+							<div class="info">
+
+								<div>
+									<div class="rate-stars selectable" ng-init="vm.rat=1"   star-rat rating="starRating" click="click(param)" mouse-hover="mouseHover(param)" mouse-leave="mouseLeave(param)">
+
+										<span class="fa fa-star-o" ></span>
+										<span class="fa fa-star-o" ></span>
+										<span class="fa fa-star-o" ></span>
+										<span class="fa fa-star-o" ></span>
+										<span class="fa fa-star-o" ></span>
+									</div>
+								</div>
+								    <span  ng-if="vm.hoverRating===1" >Terrible</span>
+								 	<span  ng-if="vm.hoverRating===2">Poor</span>
+								 	<span  ng-if="vm.hoverRating===3">Average</span>
+								 	<span  ng-if="vm.hoverRating===4">Very Good</span>
+								 	<span  ng-if="vm.hoverRating===5">Excellent</span>
+
+
+							</div>
+
+							<!--<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary">Follow</a>-->
+							<a   href="javascript:void(0)" class="follow-btn cst-btn btn-primary" ng-class="{'btn-secondary': isActive}" ng-click=" isActive = !isActive;vm.followProduct()" type="button"><span ng-if="!isActive">Follow</span><span ng-if="isActive">Unfollow</span></a>
+						</div>
+					</div>
+				</div>
+
+				<form name="form" class="write-review-container">
+
+					<div class="write-review-block">
+						<div class="write-review-header">
+
+							<span class="image-title">Image</span>
+						</div>
+
+						<div class="image-block" align="center">
+							<a href="" class="cst-btn btn-primary large" type="file" name="reviewPhoto" ngf-select
+							   ng-model="files" ngf-multiple="true" accept="image/*" ngf-pattern="'.png,.jpg,.gif'"
+							   multiple ng-change="imageAdd()" ng-click="imageErrorChk()">Choose Files</a>
+							<div class="image-status">
+								<span ng-show="!files">No File Chosen</span>
+								<span ng-show="files">Selected photos</span>
+							</div>
+							<span style="color: red" ng-show="imgError" class="help-block">Photo is required</span>
+							<div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted.
+								Acceptable files: {{files.$errorParam}}
+							</div>
+							<br>
+							<table class="table" style="width:100%">
+								<tr ng-repeat="file in files">
+									<td><img width="60px" height="80px" ngf-thumbnail="file || '/thumb.jpg'"></td>
+									<td><span style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>
+										<span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-xs"
+												ng-click="imgDelete($index)">
+											<span class="glyphicon glyphicon-trash"></span> Remove
+										</button>
+									</td>
+								</tr>
+							</table>
+							<input type="hidden" name="id" id="Id" class="form-control" value={{vm.productId}}/>
+							<input type="hidden" name="userid" id="userId" class="form-control" value={{vm.userId}}/>
+						 </div>
+					</div>
+
+					<div class="write-review-block">
+						<div class="write-review-header">
+							Review
+						</div>
+
+						<div class="write-review-body">
+						<textarea name="review" type="text" id="reviewSave" maxlength=200
+								  name="review" ng-model="vm.review" rows="10"
+								  ng-change="imageErrorChk()" placeholder="Review" required></textarea>
+						</div>
+					     <span ng-show="form.review.$dirty && form.review.$error.required"
+						   class="help-block">Review is required</span>
+						<span style="color: red" id="reviewError"> </span>
+
+					</div>
+
+					<div class="write-review-buttons">
+						<!--<input type="submit" name="submit" value="Submit" class="cst-btn btn-tertiary"   ng-disabled="form.$invalid"/>-->
+						<input class="cst-btn btn-tertiary" type="submit" ng-click="submit();addReviewHide=false"
+							   ng-disabled="form.$invalid || imgError" value="Submit"/>
+						<input class="cst-btn btn-tertiary" type="submit" ng-click="close()" value="Close"/>
+						<!--<a href="javascript:void(0);" ng-click="go_back()">Go Back</a>-->
+						<!--<button type="submit" class="btn btn-primary" ng-click="reviewProductScoring(vm.productId)">AddrEVIEA</button>-->
+						<p>{{vm.progress}}</p><span style="color: green" ng-show="vm.message">{{vm.message}}</span>
+					</div>
+
+				</form>
+			</div>		
+		</div>
+
+		<div class="footer">
+			<span>Copyright © 2016 ucraft. All rights reserved.</span>
+			<span>Privacy Policy</span>
+		</div>
+	<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,160 @@
+
+<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+
+<!--<div id="search">-->
+
+	<!--<form >-->
+
+		<!--<select   ng-model="selectedItem"-->
+				  <!--ng-options="item as item.NAME for item in categoryLVL1" > <option  value="" >All</option></select>-->
+
+		<!--<input    ng-model="searchingText;" type="search" name="search" value="What are you looking for?" onBlur="if(this.value=='')this.value='What are you looking for?'" onFocus="if(this.value=='What are you looking for?')this.value='' "> &lt;!&ndash; JS because of IE support; better: placeholder="What are you looking for?" &ndash;&gt;-->
+		<!--<fieldset  >-->
+
+			<!--<input   type="submit" ng-click="searching(searchingText,0,0,selectedItem.ID)" value="Search" class="button">-->
+
+		<!--</fieldset>-->
+
+	<!--</form>-->
+
+<!--</div> &lt;!&ndash; end search &ndash;&gt;-->
+
+<!--<div   class="row row-offcanvas row-offcanvas-right">-->
+	<!--<div class="col-xs-12 col-sm-12 col-md-12">-->
+		<!--<p class="pull-right visible-xs">-->
+			<!--<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>-->
+		<!--</p>-->
+		<!--<div class="jumbotron text-center">-->
+			<!--<h1>Easy Rate App</h1>-->
+			<!--<p>bla-bla-blaaa</p>-->
+
+		<!--</div>-->
+		<!--<div  style="background-color: #111;margin-top: 1px;position: relative;margin-bottom:70px;height: 60px;z-index: 1000" class="col-xs-12 col-sm-12 col-md-12">-->
+			<!--<div class="col-md-1">-->
+
+				<!--<div ng-show="userData[0].USERNAME" style="width: 35px;height: 40px; margin: 0 auto; text-align: center" class="avatar" >-->
+					<!--<img style="text-align:center;" width="35px" height="40px" ng-src="{{userData[0].AVATAR}}">-->
+
+				<!--</div>-->
+
+			<!--</div>-->
+			<!--<div ng-show="userData[0].USERNAME" class="col-md-2"><a>Hi, {{userData[0].USERNAME}}!</a>-->
+				<!--<div class="smile-rating" smile-rating rating-value="rating=userData[0].CURRENT_RATE" data-max="5"></div>-->
+			<!--</div>-->
+
+
+		<!--</div>-->
+
+         <!--<div align="center" style="color: red" ng-show="errorResult">{{errorResult}} </div>-->
+
+		 <!--&lt;!&ndash;<div class="col-xs-12 col-sm-6  col-lg-3 item" dir-paginate="product in getProductList|itemsPerPage:10"  total-items= 100  current-page=pageNumber>&ndash;&gt;-->
+			 <!--<div  when-scrolled='show_more()'ng-repeat="product in getProductList" class="col-xs-12 col-sm-6  col-lg-3 item" >-->
+			<!--<div class="preview-img text-center ">-->
+
+				<!--<img  class="col-sm-12"ng-src="{{product.RESOURCE}}" alt="{{product.RESOURCE}}"/>-->
+            <!--&lt;!&ndash;<span class="label"&ndash;&gt;-->
+				  <!--&lt;!&ndash;ng-init="status = product.STATUS ? 'Есть в наличии' : 'Под заказ'"&ndash;&gt;-->
+				  <!--&lt;!&ndash;ng-class="{'label-success':phone.status, 'label-warning': !phone.status}">&ndash;&gt;-->
+              <!--&lt;!&ndash;{{status}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</span>&ndash;&gt;-->
+			<!--</div>-->
+
+			<!--&lt;!&ndash;Raiting&ndash;&gt;-->
+			<!--<div ng-init="rating = product.CURRENT_SCORE"></div>-->
+
+
+			<!--<h2>{{product.NAME}}</h2>-->
+			<!--<p>{{product.SHORT_TEXT | limitTo:letterLimit}}...</p>-->
+			<!--<div style="cursor:auto" class="star-rating" star-rating rating-value="rating=rating" data-max="5"></div>&lt;!&ndash; on-rating-selected="rateFunction(rating)"&ndash;&gt;-->
+
+			<!--<p><a  href="#/products/{{product.PRODUCT_ID}}" role="button">View details | </a>-->
+			 <!--<a  href="#/addReview/{{product.PRODUCT_ID}}" role="button">Reviews |</a>-->
+			 <!--<a  href="#/similar/{{product.PRODUCT_ID}}" role="button">Similar </a></p>-->
+		<!--</div>&lt;!&ndash;/.col-sm-6.col-lg-4&ndash;&gt;-->
+		<!--<div ng-show='loading'>Loading Data ...</div>-->
+	<!--<span class="col-md-12"  ng-hide="dataLength===null">-->
+                        <!--&lt;!&ndash;<dir-pagination-controls&ndash;&gt;-->
+
+								<!--&lt;!&ndash;max-size="10"&ndash;&gt;-->
+								<!--&lt;!&ndash;direction-links="true"&ndash;&gt;-->
+								<!--&lt;!&ndash;boundary-links="true"&ndash;&gt;-->
+								<!--&lt;!&ndash;on-page-change="searching(searchingText,newPageNumber)" >&ndash;&gt;-->
+						<!--&lt;!&ndash;</dir-pagination-controls>&ndash;&gt;-->
+		<!--&lt;!&ndash;<div infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"></div>&ndash;&gt;-->
+		<!--<div align="center" style="color: green" ng-show="totalItems" > Find {{totalItem}} result! </div>-->
+	<!--</span>-->
+
+
+
+
+<!--&lt;!&ndash; ///////////////////////////////phone&ndash;&gt;-->
+			<!--&lt;!&ndash;<div class="col-xs-12 col-sm-6 col-lg-3 item" ng-repeat="phone in phones | filter: search">&ndash;&gt;-->
+				<!--&lt;!&ndash;<div class="preview-img text-center">&ndash;&gt;-->
+
+					<!--&lt;!&ndash;<img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<span class="label"&ndash;&gt;-->
+									<!--&lt;!&ndash;ng-init="status = phone.status ? 'Есть в наличии' : 'Под заказ'"&ndash;&gt;-->
+									<!--&lt;!&ndash;ng-class="{'label-success':phone.status, 'label-warning': !phone.status}">&ndash;&gt;-->
+              <!--&lt;!&ndash;{{status}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</span>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;Raiting&ndash;&gt;&ndash;&gt;-->
+			 <!--&lt;!&ndash;<div ng-init="rating = phone.rating"></div>&ndash;&gt;-->
+			 <!--&lt;!&ndash;<div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)"></div>&ndash;&gt;-->
+
+				<!--&lt;!&ndash;<h2>{{phone.name}}</h2>&ndash;&gt;-->
+				<!--&lt;!&ndash;<p>{{phone.snippet}}</p>&ndash;&gt;-->
+				<!--&lt;!&ndash;<p><a class="btn btn-default" href="#/phones/{{phone.id}}" role="button">View details &raquo;</a></p>&ndash;&gt;-->
+			<!--&lt;!&ndash;</div>&lt;!&ndash;/.col-sm-6.col-lg-4&ndash;&gt;&ndash;&gt;-->
+		<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+	<!--&lt;!&ndash;</div>&lt;!&ndash;/.col-xs-12.col-sm-8&ndash;&gt;&ndash;&gt;-->
+
+
+	<!--&lt;!&ndash;<div class="col-xs-6 col-sm-4 sidebar-offcanvas" id="sidebar">&ndash;&gt;-->
+		<!--&lt;!&ndash;<h3 class="text-center">Фильтр телефонов</h3>&ndash;&gt;-->
+		<!--&lt;!&ndash;<div class="list-group">&ndash;&gt;-->
+			<!--&lt;!&ndash;<div class="list-group-item text-center">&ndash;&gt;-->
+				<!--&lt;!&ndash;<form>&ndash;&gt;-->
+					<!--&lt;!&ndash;<input type="text" class="form-control" placeholder="Search..." ng-model="search">&ndash;&gt;-->
+				<!--&lt;!&ndash;</form>&ndash;&gt;-->
+							<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+			<!--&lt;!&ndash;<div ng-controller="ElasticSeachCtrl">&ndash;&gt;-->
+
+
+
+				<!--&lt;!&ndash;<div class="container">&ndash;&gt;-->
+					<!--&lt;!&ndash;<div class="row" id="login-container">&ndash;&gt;-->
+						<!--&lt;!&ndash;<div class="span8 offset4">&ndash;&gt;-->
+
+							<!--&lt;!&ndash;<input type="text" ng-model="queryTerm" placeholder="What are you looking for?"&ndash;&gt;-->
+								   <!--&lt;!&ndash;class="input-large" ng-change="search()">&ndash;&gt;-->
+						<!--&lt;!&ndash;</div>&ndash;&gt;-->
+					<!--&lt;!&ndash;</div>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+				<!--&lt;!&ndash;<div class="row-fluid" infinite-scroll="show_more()">&ndash;&gt;-->
+					<!--&lt;!&ndash;<div class="span9">&ndash;&gt;-->
+						<!--&lt;!&ndash;<table class="table table-striped table-bordered table-hover">&ndash;&gt;-->
+							<!--&lt;!&ndash;<tbody >&ndash;&gt;-->
+							<!--&lt;!&ndash;<tr ng-repeat="doc in results.$$state.value.hits.hits">&ndash;&gt;-->
+								<!--&lt;!&ndash;<td><h1>{{doc.fields.title[0] }}</h1>&ndash;&gt;-->
+									<!--&lt;!&ndash;{{doc.highlight.content[0] }}&ndash;&gt;-->
+									<!--&lt;!&ndash;&lt;!&ndash;<img src="{{ doc._source.user.profile_image_url }}">&ndash;&gt;&ndash;&gt;-->
+								<!--&lt;!&ndash;</td>&ndash;&gt;-->
+								<!--&lt;!&ndash;<td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<div ng-bind-html="renderResult(doc)"></div>&ndash;&gt;-->
+									<!--&lt;!&ndash;<small ng-bind-html="renderResultMetadata(doc)"></small>&ndash;&gt;-->
+								<!--&lt;!&ndash;</td>&ndash;&gt;-->
+							<!--&lt;!&ndash;</tr>&ndash;&gt;-->
+							<!--&lt;!&ndash;</tbody>&ndash;&gt;-->
+						<!--&lt;!&ndash;</table>&ndash;&gt;-->
+					<!--&lt;!&ndash;</div>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+			<!--&lt;!&ndash;</div>&ndash;&gt;-->
+		<!--</div>-->
+	<!--</div>&lt;!&ndash;/.sidebar-offcanvas&ndash;&gt;-->
+<!--&lt;!&ndash;!&#45;&#45;/row&ndash;&gt;&ndash;&gt;-->

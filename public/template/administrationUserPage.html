@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="profile-container cst-body">
+        <div class="profile-block">
+            <div class="image-block">
+                <div class="profile-image">
+                    <img ng-if="!file" check-image ng-src="{{vm.currentUser.AVATAR}}">
+                    <img  ngf-thumbnail="file || '/thumb.jpg'">
+                    <span class="fa fa-user"></span>
+
+                    <div class="overlay">
+							<span class="fa fa-pencil-square-o" type="file" name="reviewPhoto" ngf-select
+                                  ng-model="file"   accept="image/*" ngf-pattern="'.png,.jpg,.gif'"
+                                  multiple ng-change="imageAdd()">
+
+							</span>
+                    </div>
+                </div>
+
+                <div class="profile-name">
+                    <span>{{vm.currentUser.USERNAME}}</span>
+                </div>
+
+                <a href="javascript:void(0)"ng-click="vm.addProfileImage()" class="cst-btn btn-primary large">Set Avatar</a>
+
+                <p ng-if="vm.progress">Loading {{vm.progress}} %</p>
+
+            </div>
+
+            <div >
+                <div class="form-element">
+                    <input type="{{inputType}}" name="newPassword" ng-model="vm.password" placeholder="New password">
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                </div>
+
+                <div class="form-element">
+                    <input type="{{inputType}}" name="newPasswordConfirm" ng-model="vm.confirmePassword" placeholder="Confirm password">
+                    <span ng-show="form.confirmePassword.$dirty && form.confirmePassword.$error.required" class="help-block">Confirme Password is required</span>
+                    <span style="color:red" ng-show="err">{{message}}</span>
+                    <span style="color:green" ng-show="resp">{{message}}</span>
+                </div>
+
+                <a href="javascript:void(0)" ng-click="vm.change()"class="cst-btn btn-primary large">Set Password</a>
+            </div>
+
+            <div>
+                <div class="form-element">
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+
+                <div class="form-element">
+                    <select>
+                        <option>Zip</option>
+                        <option>Zip2</option>
+                    </select>
+                </div>
+
+                <a href="javascript:void(0)" class="cst-btn btn-primary large">Set Data</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Product List-->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Product Raiting</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>State</th>
+            <th> </th>
+            <th> Delete Product</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  ng-repeat=" product in productList">
+            <td>{{product.CURRENT_SCORE}}</td>
+            <td>{{product.NAME}}</td>
+            <td>{{product.CREATED_AT |date}}</td>
+            <td>{{product.STATUS | status}}</td>
+
+            <td align="center">
+                <a  href="addEditAdministrationProduct/{{product.ID}}"  class="glyphicon glyphicon-th col-sm-1"></a>
+                <a  href="products/{{product.ID}}"  class="glyphicon glyphicon-search col-sm-1"></a>
+                <a href="chart/{{product.ID}}"  class="glyphicon glyphicon-ok col-sm-1"></a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-xs"  ng-click="deleteProduct(product.ID)">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+                <button type="button" class="btn btn-success btn-xs"  ng-click="restoreProduct(product.ID)">
+                    <span class="glyphicon glyphicon-refresh"></span> Restore
+                </button>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <!--Product List END-->
+
+
+</div>
+

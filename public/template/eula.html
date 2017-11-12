@@ -1,0 +1,12 @@
+<form name="myForm" >
+    <label>I Agree:
+        <input type="checkbox" ng-model="checkboxModel.value">
+    </label><br/>
+
+
+    <br/><br/><br/>
+
+    <button class="btn btn-primary" type="submit" ng-click="reject()" >Regect</button>
+    <button class="btn btn-primary" type="submit" ng-click="agree()"  ng-disabled="!checkboxModel.value">I Agree</button>
+
+</form>

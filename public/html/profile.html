@@ -1,0 +1,142 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Profile</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="/less/template.less" />-->
+		<!--<script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header member">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="javascript:void(0)" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="profile-container cst-body">
+			<div class="profile-block">
+				<div class="image-block">
+					<div class="profile-image">
+						<img ng-if="!file" check-image ng-src="{{vm.userData.AVATAR}}">
+						 <img  ngf-thumbnail="file || '/thumb.jpg'">
+						<span class="fa fa-user"></span>
+
+						<div class="overlay">
+							<span class="fa fa-pencil-square-o" type="file" name="reviewPhoto" ngf-select
+								  ng-model="file"   accept="image/*" ngf-pattern="'.png,.jpg,.gif'"
+								  multiple ng-change="imageAdd()">
+
+							</span>
+						</div>
+					</div>
+
+					<div class="profile-name">
+						<span>{{vm.userData.USERNAME}}</span>
+					</div>
+					<!--<form   name="vm.upload_form" >-->
+
+						<!--<input  class="cst-btn btn-primary large"-->
+								<!--type="file"-->
+								<!--ngf-select-->
+								<!--ng-model="vm.file"-->
+								<!--name="userFoto"-->
+								<!--ngf-pattern="'image/*'"-->
+								<!--accept="image/*"-->
+								<!--ngf-max-size="20MB"-->
+								<!--value="Set Avatar"-->
+						<!--/>-->
+						<!--&lt;!&ndash;<img height="200px" width="150px" ngf-src="vm.file" class="thumb">&ndash;&gt;-->
+						<!--<input type="hidden" name="id" id="Id" class="form-control" value={{vm.userData.ID}} required />-->
+
+
+						<!--<input  class="cst-btn btn-primary large"  value="Set Avatar" type="submit" ng-click="vm.submit()"/>-->
+						<!--<p>{{vm.progress}}</p>-->
+					<!--</form>-->
+					 <a href="javascript:void(0)"ng-click="vm.submit()" class="cst-btn btn-primary large">Set Avatar</a>
+
+					<p ng-if="vm.progress">Loading {{vm.progress}} %</p>
+
+				</div>
+
+				<div >
+					<div class="form-element">
+						<input type="{{inputType}}" name="newPassword" ng-model="vm.password" placeholder="New password">
+						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+					</div>
+
+					<div class="form-element">
+						<input type="{{inputType}}" name="newPasswordConfirm" ng-model="vm.confirmePassword" placeholder="Confirm password">
+						<span ng-show="form.confirmePassword.$dirty && form.confirmePassword.$error.required" class="help-block">Confirme Password is required</span>
+						<span style="color:red" ng-show="err">{{message}}</span>
+						<span style="color:green" ng-show="resp">{{message}}</span>
+					</div>
+
+					<a href="javascript:void(0)" ng-click="vm.change()"class="cst-btn btn-primary large">Set Password</a>
+				</div>
+
+				<div>
+					<div class="form-element">
+						<input type="email" name="email" placeholder="Email">
+					</div>
+
+					<div class="form-element">
+						<select>
+							<option>Zip</option>
+							<option>Zip2</option>
+						</select>
+					</div>
+
+					<a href="javascript:void(0)" class="cst-btn btn-primary large">Set Data</a>
+				</div>
+			</div>
+		</div>
+	<!--</body>-->
+<!--</html>-->

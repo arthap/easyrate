@@ -1,0 +1,698 @@
+<!--<!DOCTYPE html>-->
+<!--<html class="home" lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Product</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/perfect-scrollbar.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="/less/template.less" />-->
+		<!--<script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.jquery.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>-->
+
+		<!--<script type="text/javascript" src="../js/swiper.min.js"></script>-->
+
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="container">
+
+			<div class="product-item">
+				<div class="row product-block">
+					<div class="col-sm-3">
+						<div class="product-image">
+							<img ng-src="{{mainImageUrl}}">
+						</div>
+						<ul class="phone-thumbs list-unstyled">
+							<li ng-repeat="img in phone.images">
+								<img  ng-src="{{img}}" ng-click="setImage(img)">
+								{{getProductDetailList}}
+							</li>
+							<li width="100" height="100" ng-repeat="image in getProductDetaiImagelList">
+								<img width="80" height="60"  ng-src="{{image.RESOURCE}}" ng-click="setImage(image.RESOURCE)">
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-sm-9" ng-repeat="detail in getProductDetailList">
+						<div class="product-header">
+							<span class="product-title">{{detail.NAME}}</span>
+							<span class="rating large">{{detail.CURRENT_SCORE | round}}</span>
+						</div>
+
+						<div class="product-desc">
+							<p>
+								{{detail.DESCRIPTION}}
+							</p>
+						</div>
+
+						<div class="product-footer">
+							<div class="info">
+								<div>
+									<div class="rate-stars " >
+
+										<span class="fa fa-star-o" ng-class="{'active': detail.CURRENT_SCORE <= 5 && detail.CURRENT_SCORE >4}" ></span>
+										<span class="fa fa-star-o" ng-class="{'active': detail.CURRENT_SCORE <= 4 && detail.CURRENT_SCORE >3}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': detail.CURRENT_SCORE <= 3 && detail.CURRENT_SCORE >2}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': detail.CURRENT_SCORE <= 2 && detail.CURRENT_SCORE >1}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': detail.CURRENT_SCORE <=1}"></span>
+									</div>
+
+									<a href="javascript:void(0);" ng-click="addReview(); vm.review=''; writeReviewPermitions()" role="button">Write Review</a>
+									<!--<a href="addReview/{{productId}}" >Go Back</a>-->
+								</div>
+
+								<span  ng-if="detail.CURRENT_SCORE <= 5 && detail.CURRENT_SCORE >4">Excellent</span>
+								<span  ng-if="detail.CURRENT_SCORE <= 4 && detail.CURRENT_SCORE >3">Good</span>
+								<span  ng-if="detail.CURRENT_SCORE <= 3 && detail.CURRENT_SCORE >2">Average</span>
+								<span  ng-if="detail.CURRENT_SCORE <= 2 && detail.CURRENT_SCORE >1">Poor</span>
+								<span  ng-if="detail.CURRENT_SCORE <=1">Terrible</span>
+							</div>
+
+							<!--<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary">Follow</a>-->
+							<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary" ng-class="{'btn-secondary': isActive}" ng-click=" isActive = !isActive; vm.followProduct()"  ><span ng-if="!isActive">Follow</span><span ng-if="isActive">Unfollow</span></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="product-item-info" ng-init="vm.reviewData()">
+					<ul class="product-info-tabs">
+						<li data-tab="review" class="active">Review</li>
+						<li data-tab="user-pics" ng-click="getReviewImg(vm.productId)">User Pics</li>
+						<li data-tab="additional-info">Additional Info</li>
+						<li data-tab="external-review">External Review</li>
+					</ul>
+
+					<div class="product-sections-container">
+						<div data-tab="review" class="active">
+
+							<div class="review-block clearfix"  ng-repeat="det in getProductDetaiReviewList" >
+								<div class="review-block-inner" ng-init="index=$index;vm.index=$index;likeDisLikeType=getProductDetaiReviewList;">
+									<div class="author-image avatar"><!--ng-init="getReviewCreatorName(det.CREATOR_USER_ID)"-->
+
+										<a  ng-href="profile/{{det.CREATOR_USER_ID}}"><img    ng-src="{{det.AVATAR}}"></a>
+									</div>
+
+									<div class="review-author-info">
+										<div class="author-name">
+											<span>{{det.USERNAME}}</span>
+										</div>
+
+										<div> <!--ng-init="getReviewImg(det.ID)"-->
+
+											<div class="rate-stars" ng-init="vm.rate=det.USER_CURRENT_RATE" >
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 5 && det.USER_CURRENT_RATE >4}" ></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 4 && det.USER_CURRENT_RATE >3}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 3 && det.USER_CURRENT_RATE >2}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 2 && det.USER_CURRENT_RATE >1}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 1 }"></span>
+											</div>
+
+
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 5 && det.USER_CURRENT_RATE >4" >Terrible</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 4 && det.USER_CURRENT_RATE >3">Poor</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 3 && det.USER_CURRENT_RATE >2">Average</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 2 && det.USER_CURRENT_RATE >1">Very Good</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 1 ">Excellent</span>
+										</div>
+									</div>
+
+									<div class="rating large">
+									{{det.USER_CURRENT_RATE}}
+									</div>
+
+									<div class="review-desc">
+
+										<p>	{{det.REVIEW_TEXT}} </p>
+										    <span class="col-md-12"><!-- ng-repeat="revImg in det.ey_review_resource.split(',') -->
+												  <!--ng-if="revImg[0].REVIEW_ID == det.ID "-->
+												<ul>
+													<li class="glyphicon sort-icon" ng-repeat="imgreview in  det.ey_review_resource.split(',')"
+														ng-class="[{'photo':!isCurrentPhotoIndex($index,index)},
+				                                               {'photo_active':isCurrentPhotoIndex($index,index)}]"
+														ng-click="setCurrentSlideIndex($index);slShow(index)">
+														<!--ng-if="imgreview.RESOURCE_TYPE==='JPG' ||
+													imgreview.RESOURCE_TYPE==='png' ||
+													imgreview.RESOURCE_TYPE==='jpg' ||
+													imgreview.RESOURCE_TYPE==='PNG'" -->
+
+														<img width="39px" height="39px"  ng-src="{{imgreview}}">
+
+													</li>
+													<li ng-if="imgreview.RESOURCE_TYPE==='MOV' || imgreview.RESOURCE_TYPE==='MOV'"
+				                                           			   class=" glyphicon sort-icon" ng-repeat="imgreview in revImg"
+				                                           			   ng-class="[{'video':!isCurrentPhotoIndex($index,index)},{'video_active':isCurrentPhotoIndex($index,index)}]">
+														<video controls width="90px" height="80px">
+				                                           				   <!--<source src="{{imgreview.RESOURCE}}"-->
+				                                           				   <!--type='video/webm;codecs="vp8, vorbis"'/>-->
+															<source src="{{imgreview.RESOURCE}}"   type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+														</video>
+													</li>
+
+												</ul>
+											</span>
+										    <span class="col-md-3"   ng-show="slideShow && $index===ind ">
+											  <div  class="container slider" ng-repeat="imgreview in  det.ey_review_resource.split(',')" ><!--ng-if="revImg[0].REVIEW_ID == det.ID "-->
+												<img  width="100" height="100"  class="slide preview-img text-center"
+														ng-hide="!isCurrentSlideIndex($index)" ng-src="{{imgreview }}">
+												<a class="arrow prev" href="#/products/{{vm.productId}}" ng-click="nextSlide()">   </a>
+												<a class="arrow next" href="#/products/{{vm.productId}}" ng-click="prevSlide()"> </a>
+
+											  </div>
+										   </span>
+									</div>
+								</div>
+
+
+
+								<div class="review-block-footer">
+									<div class="like-unlike-block"  ng-repeat="userAct in likeDisLikeT" ng-if="userAct.REVIEW_ID===det.ID">
+
+
+
+
+										<div class="buttons">
+										<a  href=""   ng-click="userAct.ACTIVITY_TYPE!==4 ? writeLikeDislakePermitions(1,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) : ''"  >
+										<span class="fa fa-thumbs-up like"></span>
+										</a>
+										<a href="" ng-click="userAct.ACTIVITY_TYPE!==5  ? writeLikeDislakePermitions(0,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) :'' " >
+											<span class="fa fa-thumbs-down unlike" ng-class="{'diactive': userAct.ACTIVITY_TYPE===5}"></span>
+										</a>
+										<a class="	glyphicon glyphicon-refresh" href="" ng-click="abstain(userAct.ACTIVITY_TYPE,det.ID,det.LIKES_CNT,det.DISLIKE_CNT)  "/>
+										</div>
+
+										<div class="statistics">
+											<span class="likes-count">{{det.LIKES_CNT}}</span>
+											/
+											<span class="unlikes-count">{{det.DISLIKE_CNT}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--<div class="review-block clearfix">-->
+								<!--<div class="review-block-inner">-->
+									<!--<div class="author-image avatar"></div>-->
+
+									<!--<div class="review-author-info">-->
+										<!--<div class="author-name">-->
+											<!--<span>Hayarpi Marukyan</span>-->
+										<!--</div>-->
+
+										<!--<div>-->
+											<!--<div class="rate-stars selectable">-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o active"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+											<!--</div>-->
+
+											<!--<span class="rate-status">Good</span>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="rating large">-->
+										<!--4.5-->
+									<!--</div>-->
+
+									<!--<div class="review-desc">-->
+										<!--<p>-->
+											<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget turpis.-->
+										<!--</p>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="review-block-footer">-->
+									<!--<div class="like-unlike-block">-->
+										<!--<div class="buttons">-->
+											<!--<span class="fa fa-thumbs-up like"></span>-->
+											<!--<span class="fa fa-thumbs-down unlike"></span>-->
+										<!--</div>-->
+
+										<!--<div class="statistics">-->
+											<!--<span class="likes-count">12</span>-->
+											<!--/-->
+											<!--<span class="unlikes-count">10</span>-->
+										<!--</div>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+
+							<!--<div class="review-block clearfix">-->
+								<!--<div class="review-block-inner">-->
+									<!--<div class="author-image avatar"></div>-->
+
+									<!--<div class="review-author-info">-->
+										<!--<div class="author-name">-->
+											<!--<span>Hayarpi Marukyan</span>-->
+										<!--</div>-->
+
+										<!--<div>-->
+											<!--<div class="rate-stars selectable">-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o active"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+											<!--</div>-->
+
+											<!--<span class="rate-status">Good</span>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="rating large">-->
+										<!--4.5-->
+									<!--</div>-->
+
+									<!--<div class="review-desc">-->
+										<!--<p>-->
+											<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget turpis.-->
+										<!--</p>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="review-block-footer">-->
+									<!--<div class="like-unlike-block">-->
+										<!--<div class="buttons">-->
+											<!--<span class="fa fa-thumbs-up like"></span>-->
+											<!--<span class="fa fa-thumbs-down unlike"></span>-->
+										<!--</div>-->
+
+										<!--<div class="statistics">-->
+											<!--<span class="likes-count">12</span>-->
+											<!--/-->
+											<!--<span class="unlikes-count">10</span>-->
+										<!--</div>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+						</div>
+
+						<div data-tab="user-pics">
+							<div class="swiper-container user-pics-slider">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide" ng-repeat="det in getProductDetaiReviewList"><!--ng-repeat="revImg in getProductReviewImageList ">-->
+										<div    class="image"
+
+										>
+										<!-- ng-click="setCurrentSlideIndex($index);slShow(index)-->
+										<!--ng-repeat="imgreview in revImg"-->
+											<!--ng-if="
+                                                                                    imgreview.RESOURCE_TYPE==='JPG' ||
+                                                                                    imgreview.RESOURCE_TYPE==='png' ||
+                                                                                    imgreview.RESOURCE_TYPE==='jpg' ||
+                                                                                    imgreview.RESOURCE_TYPE==='PNG'"-->
+											<img  ng-repeat="imgreview in det.ey_review_resource.split(',')"  ng-src="{{imgreview}}" >
+										</div>
+
+										<div class="pics-footer">
+											<div class="like-unlike-block" ng-repeat="userAct in likeDisLikeT" ng-if="userAct.REVIEW_ID===det.ID">
+												<div class="buttons">
+													<!--<span class="fa fa-thumbs-up like"></span>-->
+													<!--<span class="fa fa-thumbs-down unlike"></span>-->
+													<a  href=""   ng-click="userAct.ACTIVITY_TYPE!==4 ? writeLikeDislakePermitions(1,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) : ''"  >
+														<span class="fa fa-thumbs-up like"></span>
+													</a>
+													<a href="" ng-click="userAct.ACTIVITY_TYPE!==5  ? writeLikeDislakePermitions(0,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) :'' " >
+														<span class="fa fa-thumbs-down unlike" ng-class="{'diactive': userAct.ACTIVITY_TYPE===5}"></span>
+													</a>
+													<a class="	glyphicon glyphicon-refresh" href="" ng-click="abstain(userAct.ACTIVITY_TYPE,det.ID,det.LIKES_CNT,det.DISLIKE_CNT)  "/>
+
+												</div>
+											</div>
+
+											<div class="right">
+												<span>{{det.LIKES_CNT}}</span>
+												/
+												<span>{{det.DISLIKE_CNT}}</span>
+											</div>
+										</div>
+									</div>
+
+									<!--<div class="swiper-slide">-->
+										<!--<div class="image">-->
+
+										<!--</div>-->
+
+										<!--<div class="pics-footer">-->
+											<!--<div class="like-unlike-block">-->
+												<!--<div class="buttons">-->
+													<!--<span class="fa fa-thumbs-up like"></span>-->
+													<!--<span class="fa fa-thumbs-down unlike"></span>-->
+												<!--</div>-->
+											<!--</div>-->
+
+											<!--<div class="right">-->
+												<!--<span>15</span>-->
+												<!--<span>/</span>-->
+												<!--<span>3</span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="swiper-slide">-->
+										<!--<div class="image">-->
+
+										<!--</div>-->
+
+										<!--<div class="pics-footer">-->
+											<!--<div class="like-unlike-block">-->
+												<!--<div class="buttons">-->
+													<!--<span class="fa fa-thumbs-up like"></span>-->
+													<!--<span class="fa fa-thumbs-down unlike"></span>-->
+												<!--</div>-->
+											<!--</div>-->
+
+											<!--<div class="right">-->
+												<!--<span>15</span>-->
+												<!--<span>/</span>-->
+												<!--<span>3</span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="swiper-slide">-->
+										<!--<div class="image">-->
+
+										<!--</div>-->
+
+										<!--<div class="pics-footer">-->
+											<!--<div class="like-unlike-block">-->
+												<!--<div class="buttons">-->
+													<!--<span class="fa fa-thumbs-up like"></span>-->
+													<!--<span class="fa fa-thumbs-down unlike"></span>-->
+												<!--</div>-->
+											<!--</div>-->
+
+											<!--<div class="right">-->
+												<!--<span>15</span>-->
+												<!--<span>/</span>-->
+												<!--<span>3</span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="swiper-slide">-->
+										<!--<div class="image">-->
+
+										<!--</div>-->
+
+										<!--<div class="pics-footer">-->
+											<!--<div class="like-unlike-block">-->
+												<!--<div class="buttons">-->
+													<!--<span class="fa fa-thumbs-up like"></span>-->
+													<!--<span class="fa fa-thumbs-down unlike"></span>-->
+												<!--</div>-->
+											<!--</div>-->
+
+											<!--<div class="right">-->
+												<!--<span>15</span>-->
+												<!--<span>/</span>-->
+												<!--<span>3</span>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+								</div>
+							</div>
+						</div>
+
+						<div data-tab="additional-info">
+
+						</div>
+
+						<div data-tab="external-review">
+							<div class="review-block clearfix"  ng-repeat="det in getProductDetaiReviewList" >
+								<div class="review-block-inner" ng-init="index=$index;vm.index=$index;likeDisLikeType=getProductDetaiReviewList;">
+									<div class="author-image avatar"><!--ng-init="getReviewCreatorName(det.CREATOR_USER_ID)"-->
+										<img    ng-src="{{det.AVATAR}}">
+
+									</div>
+
+									<div class="review-author-info">
+										<div class="author-name">
+											<span>{{det.USERNAME}}</span>
+										</div>
+
+										<div> <!--ng-init="getReviewImg(det.ID)"-->
+
+											<div class="rate-stars" ng-init="vm.rate=det.USER_CURRENT_RATE" >
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 5 && det.USER_CURRENT_RATE >4}" ></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 4 && det.USER_CURRENT_RATE >3}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 3 && det.USER_CURRENT_RATE >2}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 2 && det.USER_CURRENT_RATE >1}"></span>
+												<span class="fa fa-star-o" ng-class="{'active': det.USER_CURRENT_RATE <= 1 }"></span>
+											</div>
+
+
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 5 && det.USER_CURRENT_RATE >4" >Terrible</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 4 && det.USER_CURRENT_RATE >3">Poor</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 3 && det.USER_CURRENT_RATE >2">Average</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 2 && det.USER_CURRENT_RATE >1">Very Good</span>
+											<span class="rate-status" ng-if="det.USER_CURRENT_RATE <= 1 ">Excellent</span>
+										</div>
+									</div>
+
+									<div class="rating large">
+										{{det.USER_CURRENT_RATE}}
+									</div>
+
+
+									<div class="review-desc">
+
+										<p>	{{det.REVIEW_TEXT}} </p>
+										    <span class="col-md-12"><!-- ng-repeat="revImg in det.ey_review_resource.split(',') -->
+												<!--ng-if="revImg[0].REVIEW_ID == det.ID "-->
+												<ul>
+													<li class="glyphicon sort-icon" ng-repeat="imgreview in  det.ey_review_resource.split(',')"
+														ng-class="[{'photo':!isCurrentPhotoIndex($index,index)},
+				                                               {'photo_active':isCurrentPhotoIndex($index,index)}]"
+														ng-click="setCurrentSlideIndex($index);slShow(index)">
+
+														<img width="39px" height="39px"  ng-src="{{imgreview}}">
+
+													</li>
+													<li ng-if="imgreview.RESOURCE_TYPE==='MOV' || imgreview.RESOURCE_TYPE==='MOV'"
+														class=" glyphicon sort-icon" ng-repeat="imgreview in revImg"
+														ng-class="[{'video':!isCurrentPhotoIndex($index,index)},{'video_active':isCurrentPhotoIndex($index,index)}]">
+														<video controls width="90px" height="80px">
+
+															<source src="{{imgreview.RESOURCE}}"   type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+														</video>
+													</li>
+
+												</ul>
+											</span>
+										    <span class="col-md-3"   ng-show="slideShow && $index===ind ">
+											  <div  class="container slider" ng-repeat="imgreview in  det.ey_review_resource.split(',')" ><!--ng-if="revImg[0].REVIEW_ID == det.ID "-->
+												  <img  width="100" height="100"  class="slide preview-img text-center"
+														ng-hide="!isCurrentSlideIndex($index)" ng-src="{{imgreview }}">
+												  <a class="arrow prev" href="#/products/{{vm.productId}}" ng-click="nextSlide()">   </a>
+												  <a class="arrow next" href="#/products/{{vm.productId}}" ng-click="prevSlide()"> </a>
+
+											  </div>
+										   </span>
+									</div>
+
+									<div class="review-image">
+										<img src="https://static.inopressa.ru/img/inopressa-logo-light.gif">
+									</div>
+								</div>
+
+								<div class="review-block-footer">
+									<div class="like-unlike-block"  ng-repeat="userAct in likeDisLikeT" ng-if="userAct.REVIEW_ID===det.ID">
+
+
+
+
+										<div class="buttons">
+											<a  href=""   ng-click="userAct.ACTIVITY_TYPE!==4 ? writeLikeDislakePermitions(1,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) : ''"  >
+												<span class="fa fa-thumbs-up like"></span>
+											</a>
+											<a href="" ng-click="userAct.ACTIVITY_TYPE!==5  ? writeLikeDislakePermitions(0,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) :'' " >
+												<span class="fa fa-thumbs-down unlike" ng-class="{'diactive': userAct.ACTIVITY_TYPE===5}"></span>
+											</a>
+											<a class="	glyphicon glyphicon-refresh" href="" ng-click="abstain(userAct.ACTIVITY_TYPE,det.ID,det.LIKES_CNT,det.DISLIKE_CNT)  "/>
+										</div>
+
+										<div class="statistics">
+											<span class="likes-count">{{det.LIKES_CNT}}</span>
+											/
+											<span class="unlikes-count">{{det.DISLIKE_CNT}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--<div class="review-block clearfix">-->
+								<!--<div class="review-block-inner">-->
+									<!--<div class="author-image avatar"></div>-->
+
+									<!--<div class="review-author-info">-->
+										<!--<div class="author-name">-->
+											<!--<span>Hayarpi Marukyan</span>-->
+										<!--</div>-->
+
+										<!--<div>-->
+											<!--<div class="rate-stars selectable">-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o active"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+											<!--</div>-->
+
+											<!--<span class="rate-status">Good</span>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="rating large">-->
+										<!--4.5-->
+									<!--</div>-->
+
+									<!--<div class="review-desc">-->
+										<!--<p>-->
+											<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget turpis.-->
+										<!--</p>-->
+									<!--</div>-->
+
+									<!--<div class="review-image">-->
+										<!--<img src="https://static.inopressa.ru/img/inopressa-logo-light.gif">-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="review-block-footer">-->
+									<!--<div class="like-unlike-block">-->
+										<!--<div class="buttons">-->
+											<!--<span class="fa fa-thumbs-up like"></span>-->
+											<!--<span class="fa fa-thumbs-down unlike"></span>-->
+										<!--</div>-->
+
+										<!--<div class="statistics">-->
+											<!--<span class="likes-count">12</span>-->
+											<!--/-->
+											<!--<span class="unlikes-count">10</span>-->
+										<!--</div>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+
+							<!--<div class="review-block clearfix">-->
+								<!--<div class="review-block-inner">-->
+									<!--<div class="author-image avatar">-->
+										<!--<img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg">-->
+									<!--</div>-->
+
+									<!--<div class="review-author-info">-->
+										<!--<div class="author-name">-->
+											<!--<span>Hayarpi Marukyan</span>-->
+										<!--</div>-->
+
+										<!--<div>-->
+											<!--<div class="rate-stars selectable">-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o active"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+												<!--<span class="fa fa-star-o"></span>-->
+											<!--</div>-->
+
+											<!--<span class="rate-status">Good</span>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--<div class="rating large">-->
+										<!--4.5-->
+									<!--</div>-->
+
+									<!--<div class="review-desc">-->
+										<!--<p>-->
+											<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget turpis.-->
+										<!--</p>-->
+									<!--</div>-->
+
+									<!--<div class="review-image">-->
+										<!--<img src="https://static.inopressa.ru/img/inopressa-logo-light.gif">-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="review-block-footer">-->
+									<!--<div class="like-unlike-block">-->
+										<!--<div class="buttons">-->
+											<!--<span class="fa fa-thumbs-up like"></span>-->
+											<!--<span class="fa fa-thumbs-down unlike"></span>-->
+										<!--</div>-->
+
+										<!--<div class="statistics">-->
+											<!--<span class="likes-count">12</span>-->
+											<!--/-->
+											<!--<span class="unlikes-count">10</span>-->
+										<!--</div>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<span>Copyright © 2016 ucraft. All rights reserved.</span>
+			<span>Privacy Policy</span>
+		</div>
+	<!--</body>-->
+<!--</html>-->

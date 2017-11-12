@@ -1,0 +1,87 @@
+<div style="margin-top: 20px" >
+
+    <form name="form" class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Image:</label>
+            <div class="col-sm-6">
+                <div class="col-md-8">
+                    <input type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true"  accept="image/*"  ngf-pattern="'.png,.jpg,.gif'"  multiple ng-change="imageAdd()"ng-click="imageErrorChk()"/>
+
+                    <span style="color: red"ng-show="imgError" class="help-block">Photo is required</span>
+                    <div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted. Acceptable files: {{files.$errorParam}}</div>
+                    <br>
+                    <table class="table" style="width:100%">
+                        <tr ng-repeat="file in files">
+                            <td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>
+                            <td><span  style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>
+                                <span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </button></td>
+                        </tr>
+
+                    </table>
+                    <!--<input type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true" data-max="3" multiple  />-->
+                    <input type="hidden" name="id" id="Id" class="form-control" value={{vm.productId}}  />
+                    <input type="hidden" name="userid" id="userId" class="form-control" value={{vm.userId}} required />
+                    <br>
+                    <!--<table class="table" style="width:100%">-->
+                        <!--<tr ng-repeat="file in files">-->
+                            <!--<td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>-->
+                            <!--<td>    <p ng-show="saveClassShow" style="color:green" class="glyphicon glyphicon-ok"> </p >-->
+                            <!--</td>-->
+                            <!--<td>-->
+                                <!--<button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">-->
+                                    <!--<span class="glyphicon glyphicon-trash"></span> Remove-->
+                                <!--</button></td>-->
+                        <!--</tr>-->
+
+                    <!--</table>-->
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div ng-init="vm.rat=1" class="form-group">
+                    <label class="control-label col-sm-2">Rating:</label>
+                    <!--<div   style="font-size:30px" class="star-rating col-sm-4" star-rating rating-value="vm.rat" data-max="5" on-rating-selected="rateFunction(vm.rat)"></div>-->
+                    <div star-rat rating="starRating" click="click(param)" mouse-hover="mouseHover(param)" mouse-leave="mouseLeave(param)"  class="col-sm-3">  </div>
+                    <span class="col-sm-3" ng-if="hoverRating===1">Terrible</span>
+                    <span class="col-sm-3" ng-if="hoverRating===2">Poor</span>
+                    <span class="col-sm-3" ng-if="hoverRating===3">Average</span>
+                    <span class="col-sm-3" ng-if="hoverRating===4">Very Good</span>
+                    <span class="col-sm-3" ng-if="hoverRating===5">Excellent</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Review:</label>
+                    <div class="col-sm-8">
+
+								<textarea   id="reviewSave" maxlength=200 type="text" value=""
+                                            name="review" class="form-control"
+                                            ng-model="vm.review" placeholder="review" rows="10" ng-change="imageErrorChk()" required></textarea>
+                        <span style="color: red" id="descriptionError"> </span>
+                        <span ng-show="form.review.$dirty && form.review.$error.required" class="help-block">Review is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <br /> <br />
+
+                        <!--<input id="btnSave" class="btn btn-primary" name="submit" type="submit" value="Save">-->
+                        <button class="btn btn-primary" type="submit" ng-click="submit();addReviewHide=false"  ng-disabled="form.$invalid || imgError">submit</button>
+                        <button type="submit" class="btn btn-primary" ng-click="close()">Close</button>
+                        <!--<button type="submit" class="btn btn-primary" ng-click="reviewProductScoring(vm.productId)">AddrEVIEA</button>-->
+                        <p>{{vm.progress}}</p><span style="color: green" ng-show="vm.message">{{vm.message}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>

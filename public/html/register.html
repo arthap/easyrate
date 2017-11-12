@@ -1,0 +1,109 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Register</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="/less/template.less" />-->
+		<!--<script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="javascript:void(0)" class="register selected">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="login-register-container cst-body">
+			<div class="login-register-block">
+				<div class="login-register-header">
+					<span class="title">Register</span>
+				</div>
+
+				<form name="form" ng-submit="vm.register()" role="form">
+					<div class="form-element">
+						<input ng-model="vm.user.USERNAME" type="text" name="name" placeholder="Your name" required >
+						<span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+					</div>
+
+					<div class="form-element">
+						<input ng-model="vm.user.eMail" type="email" name="email" placeholder="Email">
+						<span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-Mail is required</span>
+						<span ng-show="!form.email.$error.required && form.email.$error.email && form.email.$dirty">invalid email</span>
+					</div>
+
+					<div class="form-element"  ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+						<input ng-model="vm.user.PASSWORD"  type="password" name="password" placeholder="Password" required  ng-minlength="6" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" ng-change="vm.cheakPassword()">
+						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+						<span ng-show="!form.password.$error.required && (form.password.$error.minlength || form.password.$error.maxlength) && form.password.$dirty">Passwords must be between 8 and 20 characters.</span>
+						<span ng-show="!form.password.$error.required && !form.password.$error.minlength && !form.password.$error.maxlength && form.password.$error.pattern && form.password.$dirty">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
+					</div>
+
+					<div class="form-element" ng-class="{ 'has-error': form.confirmePassword.$dirty && form.confirmePassword.$error.required }">
+						<input  ng-model="vm.user.CONFIRMEPASSWORD" type="password" name="confirmPassword" id="confirmePassword"  placeholder="Confirm password"  ng-change="vm.cheakPassword()" required  ng-minlength="6" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/">
+						<span ng-show="form.confirmePassword.$dirty && form.confirmePassword.$error.required" class="help-block">Confirme password is required</span>
+						<span ng-show="confirmePassError" class="help-block">Confirme password and password dont match!</span>
+					</div>
+					<span style="color:green" ng-show="message">{{message}}</span>
+					<span style="color:red" ng-show="errorMessage">{{errorMessage}}</span>
+					<div class="form-element">
+						<input type="submit" name="submit" class="cst-btn btn-primary large" ng-disabled="form.$invalid || vm.dataLoading ||confirmePassError"   value="Register">
+						<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+					</div>
+
+					<div class="login-register-footer">
+						<span>Already have an account?</span>
+						<a href="login.html" class="login">Login</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	<!--</body>-->
+<!--</html>-->

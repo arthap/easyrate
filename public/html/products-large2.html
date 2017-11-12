@@ -1,0 +1,304 @@
+<!--<!DOCTYPE html>-->
+<!--<html class="home" lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Products Large2</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/perfect-scrollbar.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="/less/template.less" />-->
+		<!--<script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.jquery.js"></script>-->
+		<!--<script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>-->
+
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="products-large-header" ng-init="vm.getUserById()">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<div>
+							<div>
+
+								<div class="profile-image">
+									<a ng-href="profile" class="avatar">
+										<img  check-image ng-src="{{vm.user.AVATAR}}">
+									</a>
+								</div>
+								<div class="profile-name">
+									<span>{{vm.user.USERNAME}}</span>
+								</div>
+
+								<span>Worth</span>
+								<div class="points">
+									<span class="strong">790000</span>
+									<span> points</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-9">
+						<div>
+							<div>
+								<span ng-init="vm.GetReviewCountByCreatorId()">Reviewes</span>
+								<span ng-init="vm.GetAddProductCountByCreatorId()">Scores</span>
+							</div>
+
+							<div class="special">
+								<span >{{vm.reviewCount}}</span>
+								<span>10</span>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								<span>Scans</span>
+								<span>Product Add</span>
+							</div>
+
+							<div class="special">
+								<span>10</span>
+								<span>{{ vm.addProductCoun}}</span>
+							</div>
+						</div>
+						
+						<div class="rating-info">
+							<div>
+								<span></span>
+								<span>Rating</span>
+							</div>
+						</div>
+					
+						<div>
+							<div>
+								<span>25 place in the list</span>
+								<span>5 place in the region</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="products-large user">
+				<div class="row product-block"  ng-repeat="det in getProductDetaiReviewList">
+					<div class="col-sm-3">
+						<div class="product-image" ng-init="imagePush(det.RESOURCE);ind=$index">
+							 <a  ng-href="products/{{det.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">  <img ng-src="{{mainImagePath[$index]}}">   </a>
+						</div>
+					</div>
+
+					<div class="col-sm-9">
+						<div class="product-header">
+							<span class="product-title">{{det.NAME}}</span>
+							<span class="rating large">{{det.CURRENT_SCORE | round}}</span>
+						</div>
+
+						<div class="product-desc">
+							<p>
+								{{det.DESCRIPTION}}
+								<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.-->
+								<!--Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,-->
+								<!--sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget-->
+								<!--turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero volutpat, molestie magna et, scelerisque ipsum.-->
+								<!--Cras tempus sit amet libero non molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque-->
+								<!--diam, eu dapibus ipsum tempus at. Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat.-->
+								<!--Donec volutpat nisl non urna pulvinar, sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis-->
+								<!--viverra dolor, ac tempor dui ante eget turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero-->
+								<!--volutpat, molestie magna et, scelerisque ipsum. Cras tempus sit amet libero non molestie.-->
+							</p>
+						</div>
+
+						<div class="product-footer">
+							<div class="info">
+								<div>
+									<!--<div class="rate-stars selectable">-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+									<!--</div>-->
+									<div class="rate-stars"  ng-init="vm.rating = det.CURRENT_SCORE">
+										<span class="fa fa-star-o" ng-class="{'active': det.CURRENT_SCORE <= 5 && det.CURRENT_SCORE >4}" ></span>
+										<span class="fa fa-star-o" ng-class="{'active': det.CURRENT_SCORE <= 4 && det.CURRENT_SCORE >3}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': det.CURRENT_SCORE <= 3 && det.CURRENT_SCORE >2}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': det.CURRENT_SCORE <= 2 && det.CURRENT_SCORE >1}"></span>
+										<span class="fa fa-star-o" ng-class="{'active': det.CURRENT_SCORE <=1}"></span>
+									</div>
+									<!--<a href="product-review.html">Write Review</a>-->
+									<a ng-href="addReview/{{det.PRODUCT_ID}}" role="button">Write Review </a>
+								</div>
+
+								<span  ng-if="det.CURRENT_SCORE <= 5 && det.CURRENT_SCORE > 4">Excellent</span>
+								<span  ng-if="det.CURRENT_SCORE <= 4 && det.CURRENT_SCORE > 3">Good</span>
+								<span  ng-if="det.CURRENT_SCORE <= 3 && det.CURRENT_SCORE > 2">Average</span>
+								<span  ng-if="det.CURRENT_SCORE <= 2 && det.CURRENT_SCORE > 1">Poor</span>
+								<span  ng-if="det.CURRENT_SCORE <= 1">Terrible</span>
+							</div>
+						   <!--<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary" ng-class="{'btn-secondary': isActive}" ng-click=" isActive = !isActive; vm.followProduct()"  ><span ng-if="!isActive">Follow</span><span ng-if="isActive">Unfollow</span></a>-->
+							<a href="javascript:void(0)"class="follow-btn cst-btn btn-primary" ng-class="{'activeFollow': isActive}" ng-click=" isActive = !isActive;vm.followProduct(det.PRODUCT_ID)" type="button" ><span ng-if="!isActive">Unfollow</span><span ng-if="isActive">Follow</span></a>
+						</div>
+					</div>
+				</div>
+
+				<!--<div class="row product-block">-->
+					<!--<div class="col-sm-3">-->
+						<!--<div class="product-image">-->
+							<!--<img src="../images/product.jpg">-->
+						<!--</div>-->
+					<!--</div>-->
+
+					<!--<div class="col-sm-9">-->
+						<!--<div class="product-header">-->
+							<!--<span class="product-title">Americolor</span>-->
+							<!--<span class="rating large">4.5</span>-->
+						<!--</div>-->
+
+						<!--<div class="product-desc">-->
+							<!--<p>-->
+								<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.-->
+								<!--Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,-->
+								<!--sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget-->
+								<!--turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero volutpat, molestie magna et, scelerisque ipsum.-->
+								<!--Cras tempus sit amet libero non molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque-->
+								<!--diam, eu dapibus ipsum tempus at. Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat.-->
+								<!--Donec volutpat nisl non urna pulvinar, sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis-->
+								<!--viverra dolor, ac tempor dui ante eget turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero-->
+								<!--volutpat, molestie magna et, scelerisque ipsum. Cras tempus sit amet libero non molestie.-->
+							<!--</p>-->
+						<!--</div>-->
+
+						<!--<div class="product-footer">-->
+							<!--<div class="info">-->
+								<!--<div>-->
+									<!--<div class="rate-stars selectable">-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+									<!--</div>-->
+
+									<!--<a href="product-review.html">Write Review</a>-->
+								<!--</div>-->
+
+								<!--<span>Good</span>-->
+							<!--</div>-->
+
+							<!--<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary">Follow</a>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+
+				<!--<div class="row product-block">-->
+					<!--<div class="col-sm-3">-->
+						<!--<div class="product-image">-->
+							<!--<img src="../images/product.jpg">-->
+						<!--</div>-->
+					<!--</div>-->
+
+					<!--<div class="col-sm-9">-->
+						<!--<div class="product-header">-->
+							<!--<span class="product-title">Americolor</span>-->
+							<!--<span class="rating large">4.5</span>-->
+						<!--</div>-->
+
+						<!--<div class="product-desc">-->
+							<!--<p>-->
+								<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque diam, eu dapibus ipsum tempus at.-->
+								<!--Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat. Donec volutpat nisl non urna pulvinar,-->
+								<!--sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis viverra dolor, ac tempor dui ante eget-->
+								<!--turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero volutpat, molestie magna et, scelerisque ipsum.-->
+								<!--Cras tempus sit amet libero non molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare pellentesque-->
+								<!--diam, eu dapibus ipsum tempus at. Aliquam eget metus nec sem lacinia luctus. Nulla scelerisque condimentum placerat.-->
+								<!--Donec volutpat nisl non urna pulvinar, sed lacinia metus auctor. In malesuada, felis nec sagittis scelerisque, elit turpis-->
+								<!--viverra dolor, ac tempor dui ante eget turpis. Praesent sed tincidunt felis, sed convallis lectus. Integer ac libero-->
+								<!--volutpat, molestie magna et, scelerisque ipsum. Cras tempus sit amet libero non molestie.-->
+							<!--</p>-->
+						<!--</div>-->
+
+						<!--<div class="product-footer">-->
+							<!--<div class="info">-->
+								<!--<div>-->
+									<!--<div class="rate-stars selectable">-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+										<!--<span class="fa fa-star-o"></span>-->
+									<!--</div>-->
+
+									<!--<a href="product-review.html">Write Review</a>-->
+								<!--</div>-->
+
+								<!--<span>Good</span>-->
+							<!--</div>-->
+
+							<!--<a href="javascript:void(0)" class="follow-btn cst-btn btn-primary">Follow</a>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			</div>		
+		</div>
+
+		<div class="footer">
+			<span>Copyright © 2016 ucraft. All rights reserved.</span>
+			<span>Privacy Policy</span>
+		</div>
+	<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,223 @@
+<div class="col-md-12" align="center">
+
+
+    <form name="form" class="form-horizontal" >
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Image:</label>
+            <div class="col-sm-6">
+                <div class="col-md-8">
+
+                    <input type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true"  accept="image/*"  ngf-pattern="'.png,.jpg,.gif'"  multiple ng-change="imageAdd()"ng-click="imageErrorChk()"/>
+
+                    <span style="color: red"ng-show="imgError" class="help-block">Photo is required</span>
+                    <div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted. Acceptable files: {{files.$errorParam}}</div>
+                    <br>
+                    <table class="table" style="width:100%">
+                        <tr ng-repeat="file in files">
+                            <td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>
+
+                            <td><span  style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>
+                                <span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </button></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Product Name:</label>
+                    <div class="col-sm-4">
+                        <input id="nameSave"  maxlength=16 type="text"
+                               name="name" class="form-control" ng-model="vm.name" value="" placeholder="Product Name" ng-change="imageErrorChk()">
+                        <span style="color: red;" id="nameError" required> </span> </span>
+                        <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Packaging:</label>
+                    <div class="col-sm-4">
+                        <input id="packaging"  maxlength=16 type="text"
+                               name="packaging" class="form-control" ng-model="vm.packaging" value="" placeholder="Packaging"  >
+                        <span style="color: red;" id="packagingError" required> </span> </span>
+                        <span ng-show="form.packaging.$dirty && form.packaging.$error.required" class="help-block">Packaging is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Manufacturer:</label>
+                    <div class="col-sm-4">
+                        <input type="hidden"  id="manufacture" maxlength=22 type="text"
+                               name="manufacture" class="form-control"
+                        >
+
+                        <span style="color: red"ng-show="manufacturerError" class="help-block">Manufacturer is required</span>
+
+                        <angucomplete-alt id="ex2"
+                                          placeholder="Search Manufacturer"
+                                          pause="300"
+                                          selected-object="selectedManufacturer"
+                                          local-data="manufacData"
+                                          local-search="manufacturerSearch"
+                                          title-field="NAME,ID"
+                                          description-field="twitter"
+                                          image-field="pic"
+                                          minlength="1"
+                                          input-class="form-control form-control-small"
+                                          match-class="highlight"
+                        />
+                        <span  style="color: red;" id="manufacturerError"> </span>
+                        <span ng-show="form.manufacturer.$dirty && form.manufacturer.$error.required" class="help-block">Manufacturer is required</span>
+                        <span style="color: red"ng-show="manufacturerError" class="help-block">Manufacturer is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Brand:</label>
+                    <div class="col-sm-4">
+                        <input type="hidden" value="" id="brandSave" maxlength=22 type="text"
+                               name="brand" class="form-control"
+                               placeholder="Brand" required>
+                        <span style="color: red"ng-show="brandError" class="help-block">Brand is required</span>
+
+                        <angucomplete-alt id="ex2"
+                                          placeholder="Search Brand"
+                                          pause="300"
+                                          selected-object="selectedBrand"
+                                          local-data="brands"
+                                          local-search="localSearch"
+                                          title-field="NAME,ID"
+                                          description-field="twitter"
+                                          image-field="pic"
+                                          minlength="1"
+                                          input-class="form-control form-control-small"
+                                          match-class="highlight"
+                        />
+                        <span style="color: red;" id="brandError"> </span>
+                        <span ng-show="form.brand.$dirty && form.brand.$error.required" class="help-block">Brand is required</span>
+                        <span style="color: red"ng-show="brandError" class="help-block">Brand is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <label class="control-label col-sm-2">Additional Info:</label>
+                 <div class="col-sm-4">
+						 <textarea id="additionalInfo" maxlength="200"  class="form-control" name="additionalInfo"
+                                   ng-model="vm.additionalInfo"
+                                   placeholder="Additional Info" value="" rows="5" required></textarea>
+                    <span style="color: red;" id="additionalInfoError"> </span>
+                    <span ng-show="form.additionalInfo.$dirty && form.additionalInfo.$error.required" class="help-block">Additional Info is required</span>
+                 </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Indigrients:</label>
+                    <div class="col-sm-4">
+						 <textarea id="indigrients" maxlength="200"  class="form-control" name="indigrients"
+                                   ng-model="vm.indigrients"
+                                   placeholder="Indigrients" value="" rows="5" required></textarea>
+                        <span style="color: red;" id="indigrientsError"> </span>
+                        <span ng-show="form.additionalInfo.$dirty && form.additionalInfo.$error.required" class="help-block">Indigrients Info is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Calories:</label>
+                    <div class="col-sm-4">
+                        <input id="calories"  maxlength=16 type="text"
+                               name="calories" class="form-control" ng-model="vm.calories" value="" placeholder="Calories"  >
+                        <span style="color: red;" id="caloriesError" required> </span> </span>
+                        <span ng-show="form.calories.$dirty && form.calories.$error.required" class="help-block">Calories is required</span>
+                    </div>
+                </div>
+                <input type="hidden" id="status" maxlength=4 type="text" name="status"
+                       class="form-control" ng-init="vm.status=1" value=" "	placeholder="Status" required>
+
+                <div ng-init="vm.rat=1" class="form-group">
+                    <label class="control-label col-sm-2">Rating:</label>
+
+                    <div   class="col-sm-4">
+
+
+
+                        <div star-rat rating="starRating" click="click(param)" mouse-hover="mouseHover(param)" mouse-leave="mouseLeave(param)"  class="col-sm-5">  </div>
+                        <span class="col-sm-6" ng-if="hoverRating===1">Terrible</span>
+                        <span class="col-sm-6" ng-if="hoverRating===2">Poor</span>
+                        <span class="col-sm-6" ng-if="hoverRating===3">Average</span>
+                        <span class="col-sm-6" ng-if="hoverRating===4">Very Good</span>
+                        <span class="col-sm-6" ng-if="hoverRating===5">Excellent</span>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Description:</label>
+            <div class="col-sm-4">
+
+								<textarea id="descriptionSave" maxlength=600 type="text" value=""
+                                          name="description" class="form-control"
+                                          ng-model="vm.description" placeholder="description" rows="10" required></textarea>
+                <span style="color: red" id="descriptionError"> </span>
+                <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Description is required</span>
+            </div>
+        </div>
+        <div class="form-group" ng-init="categoryDataGet()">
+            <label class="control-label col-sm-2">Category:</label>
+            <div class="col-sm-4">
+
+                <select
+                        class="form-control"
+                        ng-required="true"
+                        id="category"
+                        ng-change="selectAction()"
+                        ng-model="myOption"
+                        ng-options="value.label as value.label group by value.group for value in myOptions">
+                    <optgroup label="Option Group">Option Group</option>  <option>-Category-</option></optgroup>
+                </select>
+                <span style="color: red" id="categoryError"> </span>
+                <span ng-show="form.category.$dirty && form.category.$error.required" class="help-block">Category is required</span>
+                <div ng-repeat="categ in categoryArr">
+                    <style>
+                        p:hover {
+                            color: red;
+
+                        }
+                        P {cursor: pointer}
+                    </style>
+                    <span>{{categ}}<p  class="glyphicon glyphicon-remove" ng-click="delete($index)"></p></span>
+
+
+                </div>
+                <span ng-show="messageProductAdd" class="help-block">{{messageProductAdd}}</span>
+            </div>
+        </div>
+        <input type="hidden" name="id" id="id" class="form-control" value=""ng-model="vm.id"  />
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <br /> <br />
+
+                <button class="btn btn-primary" type="submit" ng-click="vm.submit(selectedManufacturer.originalObject.ID,selectedBrand.originalObject.ID)"  ng-disabled="form.$invalid || imgError">Save as Draft</button>
+                <button class="btn btn-primary" type="submit" ng-click=" "  ng-disabled="form.$invalid">Save as Final</button>
+                <button class="btn btn-primary" ng-click=" "   >Cansel</button>
+
+
+                <p>{{vm.progress}}</p><span style="color: green" ng-show="vm.message">{{vm.message}}</span>
+            </div>
+        </div>
+
+    </form>
+
+
+
+</div>
+
+
+
+

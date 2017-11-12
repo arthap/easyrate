@@ -1,0 +1,151 @@
+<div class="container">
+<div ng-init="vm.login()" >
+<div align="right" class="form-actions">
+    <a  href="#/addProduct"   class="btn btn-primary">Add</a>
+    <a  href="#/changePassword"   class="btn btn-primary">Change password</a>
+    <a  href="#/changeEmail"   class="btn btn-primary">Change E-mail</a>
+    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+</div>
+
+</div>
+
+<div class="col-md-12">
+<h1>Hi {{vm.user}}!</h1>
+<!--<div class="avatar"></div>-->
+<div style="width: 150px;height: 200px" class="avatar">
+    <img width="150px" height="200px" check-image ng-src="{{vm.userData.AVATAR}}">
+    <!--<div  >-->
+        <!--<input type="file" file-model="myFile"/>-->
+        <!--<button ng-click="uploadFile()">upload me</button>-->
+    <!--</div>-->
+
+</div>
+
+<form   name="vm.upload_form" >
+
+    <input
+            type="file"
+            ngf-select
+            ng-model="vm.file"
+            name="userFoto"
+            ngf-pattern="'image/*'"
+            accept="image/*"
+            ngf-max-size="20MB"
+    />
+    <!--<img height="200px" width="150px" ngf-src="vm.file" class="thumb">-->
+    <input type="hidden" name="id" id="Id" class="form-control" value={{vm.userData.ID}} required />
+
+
+    <button type="submit" ng-click="vm.submit()">Add Image</button>
+    <p>{{vm.progress}}</p>
+</form>
+<!--<p>&nbsp;</p>-->
+<!--<p><a href="#/signIn" class="btn btn-primary">Logout</a></p>-->
+</div>
+
+<!--Review-->
+<div align="left" class="col-md-11" ng-hide="hidden" class="row"  ng-repeat="det in getProductDetaiReviewList"  ng-init="rating = det.CURRENT_RATE">
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>
+                <div   class="col-xs-12 col-sm-4" ng-init="imagePush(det.RESOURCE);ind=$index">
+                    <div class="phone-images"  >
+                        <h3 >{{det.NAME}}</h3>
+
+                        <a  href="#/products/{{det.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">   <img class="profile"  width="200" height="250px"  ng-src="{{mainImagePath[$index]}}"></a>
+                    </div>
+                    <!--<ul class="phone-thumbs list-unstyled">-->
+
+                        <!--<li ng-repeat="image in getImagelList[$index]" >-->
+                            <!--<img class="profile" ng-src="{{image.RESOURCE}}" ng-click="setImage(image.RESOURCE,ind)">-->
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                    <!--<div   class="container slider">-->
+                        <!--<img  ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage"-->
+                             <!--ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"-->
+                             <!--ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">-->
+                        <!--<a class="arrow prev" href="#/userPage" ng-click="nextSlide()"></a>-->
+                        <!--<a class="arrow next" href="#/userPage" ng-click="prevSlide()"></a>-->
+                        <!--<nav class="nav">-->
+                            <!--<div class="wrapper">-->
+                                <!--<ul class="dots">-->
+                                    <!--<li class="dot" ng-repeat="slide in slides">-->
+                                        <!--<a href="#/userPage" ng-class="{'active':isCurrentSlideIndex($index)}"-->
+                                           <!--ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a></li>-->
+                                <!--</ul></div>-->
+                        <!--</nav>-->
+                    <!--</div>-->
+                </div>
+
+                <div class="col-xs-12 col-sm-8">
+                    <div    ng-init="vm.rating = det.CURRENT_SCORE" >
+
+
+                        <div  class="star-rating col-md-3" star-rating rating-value="vm.rating=vm.rating" data-max="5" >
+                        </div>
+
+                        <div class="col-md-1">
+                            <!--<span ng-if="det.CURRENT_SCORE >4">Good</span>-->
+                            <!--<span ng-if="det.CURRENT_SCORE ==3">Normal</span>-->
+                            <!--<span ng-if="det.CURRENT_SCORE <3">Bad</span>-->
+                            <span ng-if=" det.CURRENT_SCORE   <=5   && det.CURRENT_SCORE >4  ">Excellent</span>
+                            <span ng-if=" det.CURRENT_SCORE   <= 4 && det.CURRENT_SCORE >3">Good</span>
+                            <span ng-if=" det.CURRENT_SCORE   <= 3 && det.CURRENT_SCORE >2">Average</span>
+                            <span ng-if=" det.CURRENT_SCORE   <= 2   && det.CURRENT_SCORE >1">Poor</span>
+                            <span ng-if=" det.CURRENT_SCORE   <=1">Terrible</span>
+                            <br>
+                                </div>
+                        <a  class="buttonFollow col-md-3" ng-class="{'activeFollow': isActive}" ng-click=" isActive = !isActive;vm.followProduct(det.PRODUCT_ID)" type="button">Follow/Unfollow</a>
+                        <br>
+
+                        <br>
+                    </div>   <br>
+                    <p>{{det.DESCRIPTION}}</p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!--Review END-->
+
+
+
+
+    <!--<div class="col-xs-12 col-sm-8">-->
+        <!--<div  ng-repeat="det in getProductDetaiReviewList"  ng-init="vm.rating = det.CURRENT_SCORE" >-->
+            <!--<div class="col-xs-12 col-sm-4">-->
+                <!--<div class="phone-images">-->
+                    <!--<img  width="200" height="250px" ng-src="{{det.RESOURCE}}">-->
+                <!--</div>-->
+                <!--<ul class="phone-thumbs list-unstyled">-->
+                    <!--<li ng-repeat="img in phone.images">-->
+                        <!--<img  ng-src="{{img}}" ng-click="setImage(img)">-->
+                        <!--{{getProductDetailList}}-->
+                    <!--</li>-->
+                    <!--<li ng-repeat="image in getProductDetaiImagelList">-->
+                        <!--<img  ng-repeat="imageRep in image" ng-src="{{imageRep.RESOURCE}}" ng-click="setImage(image.RESOURCE)">-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<h1>{{det.NAME}}</h1>-->
+            <!--<p>{{det.DESCRIPTION}}</p>-->
+            <!--<div  class="star-rating col-md-3" star-rating rating-value="vm.rating=vm.rating" data-max="5" >-->
+            <!--</div>-->
+            <!--<div class="col-md-1">-->
+                <!--<span ng-if="det.CURRENT_SCORE >4">Good</span>-->
+                <!--<span ng-if="det.CURRENT_SCORE ==3">Normal</span>-->
+                <!--<span ng-if="det.CURRENT_SCORE <3">Bad</span>-->
+                <!--<br>-->
+
+            <!--</div><br>-->
+
+            <!--<br>-->
+        <!--</div> <br> <br> </div>-->
+</div>
+

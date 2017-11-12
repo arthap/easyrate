@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="home" lang="zxx" ng-app="easyrateApp">
+
+	<head>
+
+		<title>Test</title>
+
+		<meta charset="utf-8" />
+
+		<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="author" 		content="XCodes Club">
+		<link rel="stylesheet" href="css/raiteStars.css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="css/angular-ui-notification.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/oldapp.css" />
+        <link rel="stylesheet" type="text/css" href="css/oldstyles.css" />
+        <link rel="stylesheet" type="text/css" href="css/ng-img-crop.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/perfect-scrollbar.min.css" />
+        <link rel="stylesheet" href="js/components/bootstrap-3.3.6/dist/css/bootstrap.css">
+
+		<!-- <link rel="stylesheet/less" type="text/css" href="less/template.less" /> -->
+		<!-- <script type="text/javascript" src="js/less.min.js"></script> -->
+
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/perfect-scrollbar.jquery.js"></script>
+		<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+		
+		<script type="text/javascript" src="js/script.js"></script>
+
+        <base href="/">
+
+	</head>
+
+	<body ng-controller="easyRateListCtrl" >
+
+    <div >
+      <div class="header">
+        <span class="change-mode fa fa-refresh"></span>
+
+        <div class="logo">
+          <a href="/"><img src="images/logo.png" alt="letsRate"></a>
+          <a class="small" href="/"><img src="images/logo-small.png" alt="letsRate"></a>
+        </div>
+
+        <div>
+          <div class="guest">
+            <a ng-href="login" class="login">Login</a>
+            <a ng-href="register" class="register">Register</a>
+          </div>
+
+          <div class="member">
+            <span ng-show="userName" class="user-name">{{userName}}</span>
+            <a ng-href="profile" class="avatar">
+              <img    ng-src="{{userAvatar}}">
+              <!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+            </a>
+          </div>
+
+          <a ng-href=" add " class="add">Add</a>
+          <a href="javascript:void(0)" class="message fa fa-envelope-o"></a>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <div class="search-container-inner">
+          <div class="container">
+            <div class="search-block">
+
+              <a href="javascript:void(0)"  class="fa fa-bars">
+                  <select id="mySelect"  ng-click="getCategoryLvL1()"  ng-model="selectedItem" ng-options="item as item.NAME for item in categoryLVL1" ></select></a>
+              <input type="text" name="search" ng-model="searchingText;" type="search" name="search" value="What are you looking for?" onBlur="if(this.value=='')this.value='What are you looking for?'" onFocus="if(this.value=='What are you looking for?')this.value='' ">
+              <span class="fa fa-search"  ng-click="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="categories" ng-hide="hideit">
+        <div>
+          <div class="category-block col-sm-4" style="background-image: url('images/categories/home.jpg'); ">
+            <div class="category-info">
+              <img src="images/categories/home-icon.png" alt="home">
+              <span class="category-name">Home</span>
+              <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+            </div>
+          </div>
+
+          <div class="category-block col-sm-4" style="background-image: url('images/categories/accessories.jpg'); ">
+            <div class="category-info">
+              <img src="images/categories/accessories-icon.png" alt="accessories">
+              <span class="category-name">Accessories</span>
+              <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+            </div>
+          </div>
+
+          <div class="col-sm-4 multi">
+            <div class="category-block col-sm-12" style="background-image: url('images/categories/shoes.jpg'); ">
+              <div class="category-info">
+                <img src="images/categories/shoes-icon.png" alt="shoes">
+                <span class="category-name">Shoes</span>
+                <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+              </div>
+            </div>
+
+            <div class="category-block col-sm-12" style="background-image: url('images/categories/electronics.jpg'); ">
+              <div class="category-info">
+                <img src="images/categories/electronics-icon.png" alt="electronics">
+                <span class="category-name">Electronics</span>
+                <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="col-sm-4 category-block" style="background-image: url('images/categories/bags.jpg'); ">
+            <img src="" alt="bags">
+
+            <div class="category-info">
+              <img src="images/categories/bags-icon.png" alt="bags">
+              <span class="category-name">Bags</span>
+              <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+            </div>
+          </div>
+
+          <div class="col-sm-4 category-block" style="background-image: url('images/categories/clothing.jpg'); ">
+            <div class="category-info">
+              <img src="images/categories/clothing-icon.png" alt="clothing">
+              <span class="category-name">Clothing</span>
+              <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+            </div>
+          </div>
+
+          <div class="col-sm-4 category-block" style="background-image: url('images/categories/jewelry.jpg'); ">
+            <div class="category-info">
+              <img src="images/categories/jewelry-icon.png" alt="jewelry">
+              <span class="category-name">Jewelry</span>
+              <span class="category-desc">Lorem ipsum Dolor sit amet.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+        <ng-view ></ng-view>
+      <div ng-hide="hideit || hideProduct" class="products">
+          <div class="title">
+            <span>Easy Rate</span>
+          </div>
+
+          <div class="back-to-top" scroll-to-item scroll-to="#top-scroll">
+          <div class="container" id="product" >
+          <div class="row">
+            <div class="col-md-3 col-sm-6" when-scrolled='show_more()'ng-repeat="product in getProductList">
+              <div class="product">
+                <div class="product-title">
+                  <span>{{product.NAME}}</span>
+                </div>
+                <div class="product-details">
+                  <div class="product-image">
+                    <img src="{{product.RESOURCE}}">
+                  </div>
+                  <div class="product-desc">
+                    <span>{{product.SHORT_TEXT | limitTo:letterLimit}}... </span>
+                  </div>
+                  <!--Raiting-->
+
+                  <div class="product-info">
+
+                    <div class="rate-stars"ng-init="rating = product.CURRENT_SCORE">
+                       <span class="fa fa-star-o" ng-class="{'active': rating <= 5 && rating >4}" ></span>
+                       <span class="fa fa-star-o" ng-class="{'active': rating <= 4 && rating >3}"></span>
+                       <span class="fa fa-star-o" ng-class="{'active': rating <= 3 && rating >2}"></span>
+                       <span class="fa fa-star-o" ng-class="{'active': rating <= 2 && rating >1}"></span>
+                       <span class="fa fa-star-o" ng-class="{'active': rating <=1}"></span>
+                    </div>
+
+                    <div class="rating">
+                      <span>{{product.CURRENT_SCORE  | round}}</span>
+                    </div>
+                  </div>
+                  <div class="product-footer">
+                    <!--<a href="javascript:void(0)">Lorem ipsum dolor sit amet</a>-->
+                    <a  ng-href="products/{{product.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">View details | </a>
+                    <a  ng-href="addReview/{{product.PRODUCT_ID}}" role="button"ng-click="mainPageDisable()">Reviews |</a>
+                    <a  ng-href="similar/{{product.PRODUCT_ID}}" role="button"  ng-click="mainPageDisable()">Similar </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div class="product">-->
+            <!--<div class="product-title">-->
+            <!--<span>Americolor</span>-->
+            <!--</div>-->
+            <!--<div class="product-details">-->
+            <!--<div class="product-image">-->
+            <!--<img src="images/product.jpg">-->
+            <!--</div>-->
+            <!--<div class="product-desc">-->
+            <!--<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>-->
+            <!--</div>-->
+            <!--<div class="product-info">-->
+            <!--<div class="rate-stars selectable">-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--</div>-->
+
+            <!--<div class="rating">-->
+            <!--<span>4.5</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="product-footer">-->
+            <!--<a href="javascript:void(0)">Lorem ipsum dolor sit amet</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div class="product">-->
+            <!--<div class="product-title">-->
+            <!--<span>Americolor</span>-->
+            <!--</div>-->
+            <!--<div class="product-details">-->
+            <!--<div class="product-image">-->
+            <!--<img src="images/product.jpg">-->
+            <!--</div>-->
+            <!--<div class="product-desc">-->
+            <!--<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>-->
+            <!--</div>-->
+            <!--<div class="product-info">-->
+            <!--<div class="rate-stars selectable">-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--</div>-->
+
+            <!--<div class="rating">-->
+            <!--<span>4.5</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="product-footer">-->
+            <!--<a href="javascript:void(0)">Lorem ipsum dolor sit amet</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-3 col-sm-6">-->
+            <!--<div class="product">-->
+            <!--<div class="product-title">-->
+            <!--<span>Americolor</span>-->
+            <!--</div>-->
+            <!--<div class="product-details">-->
+            <!--<div class="product-image">-->
+            <!--<img src="images/product.jpg">-->
+            <!--</div>-->
+            <!--<div class="product-desc">-->
+            <!--<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span>-->
+            <!--</div>-->
+            <!--<div class="product-info">-->
+            <!--<div class="rate-stars selectable">-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--<span class="fa fa-star-o"></span>-->
+            <!--</div>-->
+
+            <!--<div class="rating">-->
+            <!--<span>4.5</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="product-footer">-->
+            <!--<a href="javascript:void(0)">Lorem ipsum dolor sit amet</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+          </div>
+        </div>
+
+        <a href="javascript:void(0)" class="load-more">Load More</a>
+      </div>
+
+      <div class="footer">
+        <span>Copyright © 2016 ucraft. All rights reserved.</span>
+        <span>Privacy Policy</span>
+      </div>
+
+
+    </div>
+
+
+		<!-- Angular.js core JavaScript
+================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+    <!--<script src="//code.angularjs.org/snapshot/angular.min.js"></script>-->
+		<script src="js/components/angular-1.5.3/angular.js"></script>
+		<!--Angular.js Route-->
+		<script src="js/components/bower_components/angular-route/angular-route.js"></script>
+		<!--Angular.js Resource-->
+		<script src="js/components/bower_components/angular-resource/angular-resource.js"></script>
+
+		<script src="js/controller.js"></script>
+        <script src="js/controllers/ProdDetailCtrl.js"></script>
+        <script src="js/controllers/EasyRateListCtrl.js"></script>
+        <script src="js/controllers/AdministrationUserPageCtrl.js"></script>
+        <script src="js/controllers/image-crop.js"></script>
+        <script src="js/controllers/ProfileDetailCtrl.js"></script>
+
+        <script src="js/app-services/follow.service.js"></script>
+		<script src="js/app-services/authentication.service.js"></script>
+		<script src="js/app-services/flash.service.js"></script>
+		<script src="js/app-services/user.service.js"></script>
+
+		<script src="js/app-services/userData.service.js"></script>
+
+
+
+		<script src="js/components/angular-1.5.3/angular.min.js"></script>
+		<script src="js/components/angular-1.5.3/angular-animate.js"></script>
+		<script src="js/components/angular-1.5.3/angular-animate.min.js"></script>
+		<script src="js/components/angular-1.5.3/angular-touch.min.js"></script>
+		<script src="js/components/angucomplete.js"></script>
+		<script src="js/components/angucomplete-alt.js"></script>
+
+		<script type='text/javascript' src='js/components/angular-1.5.3/angular-whenScrolled.js'></script>
+		<script src="js/components/angular-1.5.3/angular-sanitize.js"></script>
+		<script src="js/components/angular-1.5.3/angular-cookies.js"></script>
+		<script src="js/components/file-upload/ng-file-upload.js"></script>
+        <script src="js/components/file-upload/ng-file-upload-shim.min.js"></script>
+        <script src="js/components/file-upload/ng-file-upload.min.js"></script>
+        <script src="js/lib/ng-img-crop.js"></script>
+
+		<script src="js/ng-rateit.js"></script>
+		<script src="js/components/angular-ui-notification.min.js"></script>
+		<script src="js/lib/dirPagination.js"></script>
+
+
+
+		<script src="js/components/bower_components/d3/d3.js"></script>
+		<script src="js/components/bower_components/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+		<script src="js/components/bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+		<link rel="stylesheet" href="js/components/bower_components/nvd3/build/nv.d3.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+	</body>
+<html>

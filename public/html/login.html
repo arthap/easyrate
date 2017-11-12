@@ -1,0 +1,112 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Login</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="../less/template.less" /> &ndash;&gt;-->
+		<!--&lt;!&ndash; <script type="text/javascript" src="/js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="javascript:void(0)" class="login selected">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="add.html" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="login-register-container cst-body">
+			<div class="login-register-block">
+				<div class="login-register-header">
+					<span class="title">Login</span>
+				</div>
+
+				<form name="form" ng-submit="vm.login()" ng-click="vm.login()" role="form">
+					<div class="form-element">
+						<input ng-model="vm.userName"  type="text" name="email" placeholder="Email (phone for mobile accounts)" required>
+						<span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">User Name is required</span>
+
+
+					</div>
+
+					<div class="form-element">
+						<input ng-model="vm.password"  type="password" name="password" required placeholder="Password">
+						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+						<span style="color: red" ng-show="notification" class="help-block">{{notification}}</span>
+					</div>
+
+
+					<div class="form-element inline">
+						<div class="styled-checkbox">
+							<!--<input type="checkbox" name="remember" value="" id="remember">-->
+							<input type="checkbox"  name="remember" value="" id="remember" ng-model="remembeMeModel.value" ng-click="checkRemembeMe()">
+							<label for="remember">
+								Keep me logged in
+							</label>
+						</div>
+
+						<a ng-href="/forgot" class="forgot">Forgot your password?</a>
+					</div>
+
+					<div class="form-element">
+						<input type="submit" name="submit" class="cst-btn btn-primary large" value="Login" ng-disabled="form.$invalid || vm.dataLoading">
+						<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+					</div>
+
+					<div class="login-register-footer">
+						<span>You don't have an account yet ?</span>
+						<a ng-href="/register" class="register">Register</a>
+
+						<a href="javascript:void(0)" class="facebook-login fa fa-facebook"></a>
+					</div>
+				</form>
+			</div>
+		</div>
+	<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,283 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="zxx">-->
+	<!--<head>-->
+		<!--<title>Add</title>-->
+
+		<!--<meta charset="utf-8" />-->
+
+		<!--<meta name="viewport" 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
+		<!--<meta name="author" 		content="XCodes Club">-->
+
+		<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700,900,700italic,400italic,300italic" rel="stylesheet" type="text/css">-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />-->
+
+		<!--&lt;!&ndash; <link rel="stylesheet/less" type="text/css" href="../less/template.less" /> &ndash;&gt;-->
+		<!--&lt;!&ndash; <script type="text/javascript" src="../js/less.min.js"></script> &ndash;&gt;-->
+
+		<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+
+		<!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="../js/script.js"></script>-->
+	<!--</head>-->
+
+	<!--<body>-->
+		<!--<div class="header">-->
+			<!--<span class="change-mode fa fa-refresh"></span>-->
+
+			<!--<div class="logo">-->
+				<!--<a href="/"><img src="../images/logo.png" alt="letsRate"></a>-->
+				<!--<a class="small" href="/"><img src="../images/logo-small.png" alt="letsRate"></a>-->
+			<!--</div>-->
+
+			<!--<div>-->
+				<!--<div class="guest">-->
+					<!--<a href="login.html" class="login">Login</a>-->
+					<!--<a href="register.html" class="register">Register</a>-->
+				<!--</div>-->
+
+				<!--<div class="member">-->
+					<!--<span class="user-name">Hayarpi Marukyan</span>-->
+					<!--<a href="profile.html" class="avatar">-->
+						<!--<img src='https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAkpAAAAJDY0ZGU4MGQwLWI5MDMtNGJjYi1hOWFlLTdiNGEyODBiZjA0OA.jpg'>-->
+					<!--</a>-->
+				<!--</div>-->
+
+				<!--<a href="javascript:void(0)" class="add">Add</a>-->
+				<!--<a href="javascript:void(0)" class="message fa fa-envelope-o"></a>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<!--<div class="search-container">-->
+			<!--<div class="search-container-inner">-->
+				<!--<div class="container">-->
+					<!--<div class="search-block">-->
+						<!--<a href="javascript:void(0)" class="fa fa-bars"></a>-->
+						<!--<input type="text" name="search">-->
+						<!--<span class="fa fa-search"></span>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+
+		<div class="add-product-container cst-body">
+			<form name="form">
+				<div>
+					<div class="image-block">
+						<span class="image-title">Image:</span>
+
+						<div class="image-preview"  >
+
+						</div>
+
+						<div  class="image-status">
+							<span ng-show="!files">No File Chosen</span>
+							<span ng-show="files">Selected photos</span>
+						</div>
+
+						<a href="" class="cst-btn btn-primary large" type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true"  accept="image/*"  ngf-pattern="'.png,.jpg,.jpeg,.gif'"  multiple ng-change="imageAdd()"ng-click="imageErrorChk()">Choose Files</a>
+						<span style="color: red"ng-show="imgError" class="help-block">Photo is required</span>
+						<div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted. Acceptable files: {{files.$errorParam}}</div>
+						<br>
+						<table class="table" style="width:100%">
+
+							<tr ng-repeat="image in productImageList ">
+								<td> <img width="60px" height="80px"  ng-src="{{image.RESOURCE}}"></td>
+								<td>
+									<span   style="color: green;">This file on the server!</span>
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger btn-xs"  ng-click="imgEditDelete($index)">
+										<span class="glyphicon glyphicon-trash"></span> Remove
+									</button>
+								</td>
+							</tr>
+							<tr ng-repeat="file in files">
+								<td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>
+								<td><span  style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>
+									<span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">
+										<span class="glyphicon glyphicon-trash"></span> Remove
+									</button></td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-md-8">
+						 <!--<input class="cst-btn btn-primary large" type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true"  accept="image/*"  ngf-pattern="'.png,.jpg,.jpeg,.gif'"  multiple ng-change="imageAdd()"ng-click="imageErrorChk()"/>-->
+						<!--<span style="color: red"ng-show="imgError" class="help-block">Photo is required</span>-->
+						<!--<div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted. Acceptable files: {{files.$errorParam}}</div>-->
+						<!--<br>-->
+						<!--<table class="table" style="width:100%">-->
+							<!--<tr ng-repeat="image in productImageList ">-->
+								<!--<td> <img width="60px" height="80px"  ng-src="{{image.RESOURCE}}"></td>-->
+								<!--<td>-->
+									<!--<span   style="color: green;">This file on the server!</span>-->
+								<!--</td>-->
+								<!--<td>-->
+									<!--<button type="button" class="btn btn-danger btn-xs"  ng-click="imgEditDelete($index)">-->
+										<!--<span class="glyphicon glyphicon-trash"></span> Remove-->
+									<!--</button>-->
+								<!--</td>-->
+							<!--</tr>-->
+							<!--<tr ng-repeat="file in files">-->
+								<!--<td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>-->
+								<!--<td><span  style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>-->
+									<!--<span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>-->
+								<!--</td>-->
+								<!--<td>-->
+									<!--<button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">-->
+										<!--<span class="glyphicon glyphicon-trash"></span> Remove-->
+									<!--</button></td>-->
+							<!--</tr>-->
+						<!--</table>-->
+
+					</div>
+				</div>
+
+				<div>
+					<div class="form-element">
+						<label>Name:</label>
+						<input type="text" name="name" id="nameSave"  maxlength=16
+							   ng-model="vm.name "  ng-change="imageErrorChk()" value="" placeholder="Name">
+						<span style="color: red;" id="nameError" required> </span> </span>
+						<span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
+					</div>
+
+					<div  ng-show="userPermission!=='1'" class="form-element">
+						<label>Manufacturer:</label>
+						<input  type="hidden"  id="manufacture" maxlength=22
+								 name="manufacturer" placeholder="Search Manufacturer">
+
+						<span style="color: red"ng-show="manufacturerError" class="help-block">Manufacturer is required</span>
+
+						<angucomplete-alt id="ex2"
+										  placeholder="Search Manufacturer"
+										  pause="300"
+										  selected-object="selectedManufacturer"
+										  local-data="manufacData"
+										  local-search="manufacturerSearch"
+										  title-field="ID,NAME"
+										  description-field="twitter"
+										  image-field="pic"
+										  minlength="1"
+										  input-class="form-control form-control-small"
+										  match-class="highlight"/>
+						<span  style="color: red;" id="manufacturerError"> </span>
+						<span ng-show="form.manufacturer.$dirty && form.manufacturer.$error.required" class="help-block">Manufacturer is required</span>
+						<span style="color: red"ng-show="manufacturerError" class="help-block">Manufacturer is required</span>
+					</div>
+
+					<div class="form-element">
+						<label>Brand:</label>
+						<input type="hidden" id="brandSave" maxlength=22
+							   name="brand" placeholder="Search Brand" required>
+						<span style="color: red" ng-show="brandError" class="help-block">Brand is required</span>
+
+						<angucomplete-alt id="ex2"
+										  placeholder="Search brand"
+										  pause="300"
+										  selected-object="selectedBrand"
+										  local-data="brands"
+										  local-search="localSearch"
+										  title-field="ID,NAME"
+										  initial-value="brandName"
+										  description-field="twitter"
+										  image-field="pic"
+										  minlength="2"
+										  input-class="form-control form-control-small"
+										  match-class="highlight"/>
+						<span style="color: red;" id="brandError"> </span>
+						<span class="help-block">{{vm.brand}}</span>
+						<span ng-show="form.brand.$dirty && form.brand.$error.required" class="help-block">Brand is required</span>
+						<span style="color: red" ng-show="brandError" class="help-block">Brand is required</span>
+					</div>
+
+					<div class="form-element">
+						<label ng-click="a()">Short Text:</label>
+						<textarea class="small" id="shortText" maxlength="200" name="shortText"
+								  ng-model="vm.shortText" placeholder="Short_Text" rows="5" required></textarea>
+						<span style="color: red;" id="shortTextError"> </span>
+						<span ng-show="form.shortText.$dirty && form.shortText.$error.required"
+							  class="help-block">Short Text is required</span>
+					</div>
+
+					<input type="hidden" id="status" maxlength=4 type="text" name="status"
+						   class="form-control" ng-init="vm.status=1" value=" "	placeholder="Status" required>
+
+					<div class="rate-stars selectable"  star-rat rating="starRating" click="click(param)" mouse-hover="mouseHover(param)" mouse-leave="mouseLeave(param)">
+							<span class="fa fa-star-o"         ng-if="hoverRating===1">Terrible</span>  ></span>
+							<span class="fa fa-star-o"         ng-if="hoverRating===2">Poor</span>      ></span>
+							<span class="fa fa-star-o active"  ng-if="hoverRating===3">Average</span>   ></span>
+							<span class="fa fa-star-o"         ng-if="hoverRating===4">Very Good</span> ></span>
+							<span class="fa fa-star-o"         ng-if="hoverRating===5">Excellent</span> ></span>
+						</div>
+					</div>
+
+					<div class="form-element">
+						<label>Description:</label>
+						<textarea id="descriptionSave" maxlength=600 rows="10" type="text"
+								  name="description" ng-model="vm.description" placeholder="Description" required></textarea>
+						<span style="color: red" id="descriptionError"> </span>
+						<span ng-show="form.description.$dirty && form.description.$error.required"
+							  class="help-block">Description is required</span>
+					</div>
+
+					<div class="form-element" ng-init="categoryDataGet()">
+						<label>Category:</label>
+						<select
+								class="form-control"
+								ng-required="true"
+								id="category"
+								ng-change="selectAction()"
+								ng-model="myOption"
+								ng-options="value.label as value.label group by value.group for value in myOptions">
+							<optgroup label="Option Group">Option Group</option>
+								<option>-Category-</option>
+							</optgroup>
+						</select>
+						<span style="color: red" id="categoryError"> </span>
+                            <span ng-show="form.category.$dirty && form.category.$error.required"
+								  class="help-block">Category is required</span>
+
+						<br>
+						<style>
+							p:hover {color: red;}
+							P {cursor: pointer}
+						</style>
+						<div>
+							<table class="table">
+								<thead class="thead-inverse">
+								<tr>
+									<th>Parent Category</th>
+									<th>Child Category</th>
+									<th>Delete</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat="category in categoryArr | orderBy : 'childName' ">
+									<td>{{category.parentName}}</td>
+									<td>{{category.childName}}</td>
+									<td><p class="glyphicon glyphicon-remove" ng-click="delete($index)"></p></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<span ng-show="messageProductAdd" class="help-block">{{messageProductAdd}}</span>
+					</div>
+				    <input type="hidden" name="id" id="id" class="form-control" value=""ng-model="vm.id"  />
+
+				<div class="form-buttons">
+					<!--<input type="submit" name="save" value="save" class="cst-btn btn-primary">-->
+					<input type="submit" name="save" value="save" ng-if="productId===undefined && userPermission==='1'" class="cst-btn btn-primary" type="submit" ng-click="vm.submit(manufacturerId,selectedBrand.originalObject.ID)"   ng-disabled="form.$invalid || imgError" />
+					<input type="submit" name="save" value="save" ng-if="productId===undefined && userPermission!=='1'" class="cst-btn btn-primary" type="submit" ng-click="vm.submit(selectedManufacturer.originalObject.ID,selectedBrand.originalObject.ID)"  ng-disabled="form.$invalid || imgError"/>/
+					<input type="submit" name="save" value="Save Change" ng-if="productId!==undefined" class="cst-btn btn-primary" type="submit" ng-click="vm.submit()"   />
+					<input type="submit" name="save" value="Save Draft Change" ng-if="productId===undefined && userPermission==='1'" class="cst-btn btn-primary" type="submit" ng-click="draft(manufacturerId,selectedBrand.originalObject.ID)"/>
+					<p>{{vm.progress}}</p><span style="color: green" ng-show="vm.message">{{vm.message}}</span>
+				</div>
+			</form>
+		</div>
+	<!--</body>-->
+<!--</html>-->

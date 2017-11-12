@@ -1,0 +1,300 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="phone-images" width="350" height="250px">
+      <img width="350" height="250px" ng-src="{{mainImageUrl}}">
+    </div>
+    <ul class="phone-thumbs list-unstyled">
+      <li ng-repeat="img in phone.images">
+        <img  ng-src="{{img}}" ng-click="setImage(img)">
+        {{getProductDetailList}}
+      </li>
+      <li width="100" height="100" ng-repeat="image in getProductDetaiImagelList">
+        <img width="80" height="60"  ng-src="{{image.RESOURCE}}" ng-click="setImage(image.RESOURCE)">
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-xs-12 col-sm-8">
+    <!--ProductDetailList-->
+    <div  ng-repeat="detail in getProductDetailList"   >
+      <h1>{{detail.NAME}}</h1>
+      <p>{{detail.DESCRIPTION}}</p>
+      <div    class="star-rating col-md-3" star-rating rating-value="vm.rating=detail.CURRENT_SCORE   " data-max="5" >
+       </div>
+      <div  style="font: 20px bold;padding-top:4px" class="col-md-1">{{detail.CURRENT_SCORE}}</div>
+      <div  style="font: 20px bold;padding-top:4px" class="col-md-1">
+        <span ng-if=" vm.rating   <=5   && vm.rating >4  ">Excellent</span>
+        <span ng-if=" vm.rating   <= 4 && vm.rating >3">Good</span>
+        <span ng-if=" vm.rating   <= 3 && vm.rating >2">Average</span>
+        <span ng-if=" vm.rating   <= 2   && vm.rating >1">Poor</span>
+        <span ng-if=" vm.rating   <=1">Terrible</span>
+        <br>
+
+      </div><br><br>
+    </div>
+    <br>
+    <!--ProductDetailList end-->
+    <!--Write Review follow/unfollow-block-->
+    <div>
+        <a ng-click="addReview(); vm.review=''; writeReviewPermitions()"style="margin-left: 40px" role="button">Write Review</a>
+        <a  class="buttonFollow" ng-class="{'activeFollow': isActive}" ng-click=" isActive = !isActive;vm.followProduct()" type="button">Follow/Unfollow</a>
+      <!--<button ng-class="{'activeFollow': isActive}" ng-hide="isActive"href="#" ng-click=" isActive = !isActive" type="button"  >-->
+        <!--<span class="glyphicon glyphicon-thumbs-up"></span> Like-->
+      <!--</button>-->
+      <!--<button ng-class="{'activeFollow': isActive}" href="#" ng-show="isActive" ng-click=" isActive = !isActive" type="button" >-->
+        <!--<span class="glyphicon glyphicon-thumbs-down"></span> Like-->
+      <!--</button>-->
+      <!--<a ng-show="isActive"href="#" ng-click=" isActive = !isActive">-->
+        <!--<span class="glyphicon glyphicon-thumbs-up"></span>-->
+      <!--</a>-->
+      <!--<a ng-hide="isActive"href="#" ng-click=" isActive = !isActive">-->
+        <!--<span class="glyphicon glyphicon-thumbs-down"></span>-->
+      <!--</a>-->
+    </div>
+    <!--Write Review follow/unfollow-block-end-->
+
+   <!--addReview-->
+    <div style="margin-top: 20px" ng-hide="!addReviewHide">
+
+      <form name="form" class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label col-sm-2">Image:</label>
+          <div class="col-sm-6">
+            <div class="col-md-8">
+              <input type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true"  accept="image/*"  ngf-pattern="'.png,.jpg,.gif'"  multiple ng-change="imageAdd()"ng-click="imageErrorChk()"/>
+
+              <!--<span style="color: red"ng-show="imgError" class="help-block">Photo is required</span>-->
+              <div class="alert" ng-show="files.$error === 'pattern'">file type is not accepted. Acceptable files: {{files.$errorParam}}</div>
+              <br>
+              <table class="table" style="width:100%">
+                <tr ng-repeat="file in files">
+                  <td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>
+                  <td><span  style="color: red" ng-if="files[$index].size > 1024000">  File too large : max size 1MB  (Image size-{{files[$index].size | filesize}}) </span>
+                    <span style="color: green" ng-if="files[$index].size <1024000"> Image size-{{files[$index].size | filesize}}</span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">
+                      <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button></td>
+                </tr>
+
+              </table>
+              <!--<input type="file" name="reviewPhoto"  ngf-select ng-model="files" ngf-multiple="true" data-max="3" multiple  />-->
+              <input type="hidden" name="id" id="Id" class="form-control" value={{vm.productId}}  />
+              <input type="hidden" name="userid" id="userId" class="form-control" value={{vm.userId}} required />
+              <br>
+              <!--<table class="table" style="width:100%">-->
+                <!--<tr ng-repeat="file in files">-->
+                  <!--<td> <img width="60px" height="80px"  ngf-thumbnail="file || '/thumb.jpg'"></td>-->
+                  <!--<td>    <p ng-show="saveClassShow" style="color:green" class="glyphicon glyphicon-ok"> </p >-->
+                  <!--</td>-->
+                  <!--<td>-->
+                    <!--<button type="button" class="btn btn-danger btn-xs"  ng-click="imgDelete($index)">-->
+                      <!--<span class="glyphicon glyphicon-trash"></span> Remove-->
+                    <!--</button></td>-->
+                <!--</tr>-->
+
+              <!--</table>-->
+
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div ng-init="vm.rat=1" class="form-group">
+              <label class="control-label col-sm-2">Rating:</label>
+              <!--<div   style="font-size:30px" class="star-rating col-sm-4" star-rating rating-value="vm.rat" data-max="5" on-rating-selected="rateFunction(vm.rat)"></div>-->
+              <div star-rat rating="starRating" click="click(param)" mouse-hover="mouseHover(param)" mouse-leave="mouseLeave(param)"  class="col-sm-3">  </div>
+              <span class="col-sm-3" ng-if="hoverRating===1">Terrible</span>
+              <span class="col-sm-3" ng-if="hoverRating===2">Poor</span>
+              <span class="col-sm-3" ng-if="hoverRating===3">Average</span>
+              <span class="col-sm-3" ng-if="hoverRating===4">Very Good</span>
+              <span class="col-sm-3" ng-if="hoverRating===5">Excellent</span>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Review:</label>
+              <div class="col-sm-8">
+
+								<textarea   id="reviewSave" maxlength=200 type="text" value=""
+                                          name="review" class="form-control"
+                                          ng-model="vm.review" placeholder="review" rows="10" ng-change="imageErrorChk()" ></textarea>
+                <span style="color: red" id="descriptionError"> </span>
+                <!--<span ng-show="form.review.$dirty && form.review.$error.required" class="help-block">Review is required</span>-->
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <br /> <br />
+                <!--<input id="btnSave" class="btn btn-primary" name="submit" type="submit" value="Save">-->
+                <button class="btn btn-primary" type="submit" ng-click="submit();"  ng-disabled="form.$invalid ">submit</button><!--|| imgError-->
+                <button type="submit" class="btn btn-primary" ng-click="addReviewHide=false">Close</button>
+                <!--<button type="submit" class="btn btn-primary" ng-click="reviewProductScoring(vm.productId)">AddrEVIEA</button>-->
+                <p>{{vm.progress}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <!--add review-end-->
+    <!--tabs-->
+    <div ng-hide="addReviewHide" style="padding: 30px;width: 1000px" class="container" ng-init="vm.reviewData()" >
+      <ul class="nav nav-tabs" role="tablist" >
+        <li ng-class="active"  ng-click="active='active';active2='';active3='';;active1=''"><a ng-click="hidden=false;hidden2=true;hidden3=true;hidden1=true"    role="tab" data-toggle="tab">Review</a></li>
+        <li ng-class="active1" ng-click="active1='active';active2='';active3='';active=''"><a ng-click="hidden1=false;hidden=true;hidden2=true;hidden3=true"  role="tab" data-toggle="tab">User Pics</a></li>
+        <!--<li ng-class="active2" ng-click="active2='active';active1='';active3='';active=''"><a ng-click="hidden2=false;hidden=true;hidden3=true;hidden1=true"   role="tab" data-toggle="tab">Additional Info</a></li>-->
+        <li  ng-class="active3" ng-click="active3='active';active2='';active='';active1='';getProductDetaiExternalReviewList()"><a  ng-click="hidden3=false;hidden=true;hidden2=true;hidden1=true"   role="tab" data-toggle="tab">External Review</a></li>
+      </ul>
+
+      <!--Review-Tabs-->
+        <div ng-hide="hidden"class="row" ng-repeat="det in getProductDetaiReviewList"  >
+
+          <table class="table" ng-init="index=$index;vm.index=$index;likeDisLikeType=getProductDetaiReviewList;">
+              <tbody>
+              <tr>
+                <td>
+                  <div class="col-md-1" ng-init="getReviewCreatorName(det.CREATOR_USER_ID)">
+
+                    <img  width="75px" height="50px" ng-src="{{det.AVATAR}}">
+                    <span style="color: yellow">{{getProductReviewCreatorNameList[$index]}}</span>
+                  </div>
+                  <div   class="col-md-4">
+                    <!--<div class="col-md-6" class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)"> </div>-->
+                    <div  class="star-rating col-md-6" star-rating rating-value="vm.rating=det.CURRENT_RATE" data-max="5" >   </div>{{det.CURRENT_RATE}}
+                    <div class="col-md-1" style="margin-top:8px" ng-init="getReviewImg(det.ID)">{{det.CURRENT_SCORE}}</div>
+                    <br>   <br>
+
+                    <span   class="col-md-12"  ng-repeat="revImg in getProductReviewImageList " ng-if="revImg[0].REVIEW_ID == det.ID ">
+                       <ul>
+                         <li  ng-if="imgreview.RESOURCE_TYPE==='JPG' || imgreview.RESOURCE_TYPE==='png'||imgreview.RESOURCE_TYPE==='jpg' || imgreview.RESOURCE_TYPE==='PNG'"  class=" glyphicon sort-icon"    ng-repeat="imgreview in revImg"  ng-class="[{'photo':!isCurrentPhotoIndex($index,index)},{'photo_active':isCurrentPhotoIndex($index,index)}]"
+                           ng-click="setCurrentSlideIndex($index);slShow(index)">  <img width="39px" height="39px" ng-src="{{imgreview.RESOURCE}}" >
+
+                         </li>
+                         <li  ng-if="imgreview.RESOURCE_TYPE==='MOV' || imgreview.RESOURCE_TYPE==='MOV'" class=" glyphicon sort-icon"    ng-repeat="imgreview in revImg"  ng-class="[{'video':!isCurrentPhotoIndex($index,index)},{'video_active':isCurrentPhotoIndex($index,index)}]">
+                           <video controls width="90px" height="80px" >
+                             <!--<source src="{{imgreview.RESOURCE}}"-->
+                             <!--type='video/webm;codecs="vp8, vorbis"'/>-->
+                             <source   src="{{imgreview.RESOURCE}}"
+                                       type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+                           </video>
+                         </li>
+
+                       </ul>
+                    </span ><br><br><br>
+                    <div class="col-md-3"   ng-show="slideShow && $index===ind ">
+                    <div  class="container slider" ng-repeat="revImg in getProductReviewImageList " ng-if="revImg[0].REVIEW_ID == det.ID ">
+                      <img    ng-repeat="imgreview in revImg" class="slide preview-img text-center"
+                             ng-hide="!isCurrentSlideIndex($index)" ng-src="{{imgreview.RESOURCE}}">
+                      <a class="arrow prev" href="#/products/{{vm.productId}}" ng-click="nextSlide()">   </a>
+                      <a class="arrow next" href="#/products/{{vm.productId}}" ng-click="prevSlide()"> </a>
+
+                    </div>
+                   </div>
+
+                  </div>
+                  <!--Review like/Dislike-->
+                  <style>
+                    .diactive{
+                      color:grey;
+                    }
+                </style>
+
+                  <div class="col-md-2" ng-repeat="userAct in likeDisLikeT" ng-if="userAct.REVIEW_ID===det.ID">
+                    {{det.LIKES_CNT}}/{{det.DISLIKE_CNT}}
+
+                    <a  href=""   ng-click="userAct.ACTIVITY_TYPE!==4 ? writeLikeDislakePermitions(1,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) : ''"  >
+                      <span ng-class="{'diactive': userAct.ACTIVITY_TYPE===4}"  class="glyphicon glyphicon-thumbs-up"></span>
+                    </a>/
+                    <a href="" ng-click="userAct.ACTIVITY_TYPE!==5  ? writeLikeDislakePermitions(0,det.ID,det.LIKES_CNT,det.DISLIKE_CNT,userAct.ACTIVITY_TYPE) :'' " >
+                      <span ng-class="{'diactive': userAct.ACTIVITY_TYPE===5}"  class="glyphicon glyphicon-thumbs-down"></span>
+                    </a>
+                    <a href="" ng-click="abstain(userAct.ACTIVITY_TYPE,det.ID,det.LIKES_CNT,det.DISLIKE_CNT)  " >
+                      <span >abstain</span>
+                    </a>
+                  </div>
+                  <!--Review like/Dislike End-->
+                  <br>
+                  <div class="col-md-8">{{det.REVIEW_TEXT}} </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+        </div>
+    <!--Review END-->
+
+     <!--USER PIC-Tabs-->
+      <div ng-hide="hidden1" class="row col-md-8"  >
+
+
+ <span   class="col-md-12"  ng-repeat="revImg in getProductReviewImageList ">
+
+
+
+
+                         <span  ng-if="imgreview.RESOURCE_TYPE==='JPG' || imgreview.RESOURCE_TYPE==='png'||imgreview.RESOURCE_TYPE==='jpg' || imgreview.RESOURCE_TYPE==='PNG'" style="display: inline;"   ng-repeat="imgreview in revImg"
+                              ng-click="setCurrentSlideIndex($index);slShow(index)">  <img width="39px" height="39px" ng-src="{{imgreview.RESOURCE}}" >
+
+                         </span>
+
+
+                    </span ><br><br><br>
+ <!--<span   class="col-md-12"  ng-repeat="revImg in getProductReviewImageList ">-->
+        <!--<ul>-->
+          <!--<li  ng-if="imgreview.RESOURCE_TYPE==='MOV' || imgreview.RESOURCE_TYPE==='MOV'" class=" glyphicon sort-icon video"    ng-repeat="imgreview in revImg" >-->
+            <!--<video controls width="90px" height="80px" >-->
+              <!--&lt;!&ndash;<source src="{{imgreview.RESOURCE}}"&ndash;&gt;-->
+              <!--&lt;!&ndash;type='video/webm;codecs="vp8, vorbis"'/>&ndash;&gt;-->
+              <!--<source   src="{{imgreview.RESOURCE}}"-->
+                        <!--type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>-->
+            <!--</video>-->
+          <!--</li>-->
+
+        <!--</ul>-->
+        </span ><br><br><br>
+
+      </div>
+     <!--USER PIC END-->
+
+      <!--ADDITIONAL INFO-Tabs-->
+      <!--<div  ng-hide="hidden2"    class="row"  ng-repeat="det in getProductDetaiReviewList"  ng-init="rating = det.CURRENT_SCORE">-->
+        <!--<div class="col-md-1">-->
+          <!--<img  width="50px" height="75px" ng-src="{{mainImageUrl}}">-->
+          <!--{{det.NAME}}-->
+        <!--</div>-->
+        <!--<div   class="col-md-8">-->
+          <!--<div  class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)"></div>-->
+          <!--{{det.CURRENT_SCORE}}-->
+        <!--</div>-->
+        <!--<div class="col-md-6">{{det.DESCRIPTION}} </div>-->
+      <!--</div>-->
+      <!--ADDITIONAL INFO END-->
+
+      <!--External Review-Tabs-->
+      <div ng-hide="hidden3" class="row"  ng-repeat="det in externalReviewList"  ng-init="rating = det.CURRENT_SCORE">
+        <div class="col-md-1">
+          <img  width="50px" height="75px" ng-src="{{mainImageUrl}}">
+          {{det.NAME}}
+        </div>
+        <div class="container">
+        <div   class="col-md-4">
+          <div  class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)"> </div>
+          {{det.CURRENT_SCORE}}
+        </div>
+          <div class="col-md-1" ><h1 align="right">LOGO</h1></div>
+        </div>
+        <div class="col-md-6">'Content here, content here', making it look like readable English. Man{{det.DESCRIPTION}} </div>
+
+
+
+      </div>
+
+
+      <!--External Review END-->
+  </div>
+ </div>
+  </div>
