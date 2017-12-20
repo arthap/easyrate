@@ -58,14 +58,15 @@ app.use(bodyParser.json());
 // app.use(session({ secret: 'session secret key' }));
 app.use(flash());
 // app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
-
+var ip = process.env.IP || '127.0.0.1';
+var port = process.env.PORT || 8080;
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     // connectionLimit : 10,
 
-    host:  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-    user: 'root'||'adminv5U5hn4' ,
-    password: 'root'|| 'qt-ph4iJS-JW',
+    host:  ip || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+    user: 'newuser'||'root'||'adminv5U5hn4' ,
+    password: 'password' ||'root'|| 'qt-ph4iJS-JW',
     database: 'easytes'
     // host     :  '127.2.204.130',
     // user     : 'adminv5U5hn4',
@@ -146,7 +147,7 @@ app.get('/email', function (req, res) {
 
     client.sendMail(email, function (err, info) {
         if (err) {
-            console.log(error);
+            // console.log(error);
         }
         else {
             console.log('Message sent: ' + info.response);
@@ -735,7 +736,7 @@ app.post('/DeleteFollowProduct', function (req, res, next) {
                     }
                     else {
 
-                        console.log(error)
+                        // console.log(error)
 
                         // var succes = true;
                     }
@@ -745,7 +746,7 @@ app.post('/DeleteFollowProduct', function (req, res, next) {
                     if (!error) {
                         console.log('Increased the salary for Joe.');
                         return res.json({sucsess: true, err_desc: error});
-                        next();
+                        // next();
                     }
                     else {
 
@@ -803,7 +804,7 @@ app.post('/AddFollowProduct', function (req, res, next) {
                     }
                     else {
 
-                        console.log(error)
+                        // console.log(error)
 
                         // var succes = true;
                     }
@@ -967,7 +968,7 @@ app.post('/AddProductCategory', function (req, res, next) {
             if (array[k].childName) {
                 var childCategoryName = array[k].childName;
                 connection.query(sql2, [childCategoryName], function (err, res) {
-                    // if(err){}
+                    if(err){}
                     console.log("DATABASE " + childCategoryName);
                     if (res.length !== 0) {
                         var values = [productId, res[0].ID, new Date(), new Date(), res[0].PARENT_ID,];
@@ -1029,7 +1030,7 @@ app.post('/AddManufacturerId/:name', function (req, res, next) {
             connection.query(queryString, [name], function (err, ey_manufacturers) {
                 if (!err) {
                     return res.json({data: ey_manufacturers[0].ID});
-                    console.log('Increased the salary for Joe.');
+                    // console.log("Increased the salary for Joe.");
                 }
             });
 
@@ -1049,7 +1050,7 @@ app.post('/GetproductReviewRaiting/:productId', function (req, res, next) {
     connection.query(queryString, [productId], function (err, reviewRaitingData) {
         if (!err) {
             return res.json({data: reviewRaitingData});
-            console.log('Increased the salary for Joe.');
+            // console.log('Increased the salary for Joe.');
         }
     });
 
@@ -1073,7 +1074,7 @@ app.post('/AddBrandId', function (req, res, next) {
                 if (!err) {
                     var id = ey_brands[0].ID;
                     return res.json({id: id, success: true});
-                    console.log('Increased the salary for Joe.');
+                    // console.log('Increased the salary for Joe.');
                 }
             });
 
@@ -1102,7 +1103,7 @@ app.post('/AddReviewActivity', function (req, res, next) {
 
 
             return res.json({sucsess: true});
-            console.log('Increased the salary for Joe.');
+            // console.info('Increased the salary for Joe.');
         }
         else {
             console.log('Error while performing Query. add error');
@@ -1164,7 +1165,7 @@ app.post('/AddLike', function (req, res, next) {
 
 
                     return res.json({sucsess: true});
-                    console.log('Increased the salary for Joe.');
+                    // console.log('Increased the salary for Joe.');
                 }
                 else {
                     console.log('Error while performing Query. add error');
@@ -1208,7 +1209,7 @@ app.post('/LikeRecovere', function (req, res, next) {
 
 
                     return res.json({sucsess: true});
-                    console.log('Increased the salary for Joe.');
+                    // console.log('Increased the salary for Joe.');
                 }
                 else {
                     console.log('Error while performing Query. add error');
@@ -1248,7 +1249,7 @@ app.post('/AddDisLike', function (req, res, next) {
             connection.query('INSERT INTO ey_user_activity (USER_ID, ACTIVITY_TYPE, COMMENT,ACTIVITY_LINK,PRODUCT_ID,REVIEW_ID,ISDELETE,ACTIVITY_DATE,CREATED_AT,UPDATED_AT) VALUES(?,?,?,?,?,?,?,?,?,?)', values, function (error, result) {
                 if (!error) {
                     return res.json({sucsess: true});
-                    console.log('Increased the salary for Joe.');
+                    // console.log('Increased the salary for Joe.');
                 }
                 else {
                     console.log('Error while performing Query. add error');
@@ -1290,7 +1291,7 @@ app.post('/DisLikeRecovere', function (req, res, next) {
 
 
                     return res.json({sucsess: true});
-                    console.log('Increased the salary for Joe.');
+                    // console.log('Increased the salary for Joe.');
                 }
                 else {
                     console.log('Error while performing Query. add error');
@@ -1489,7 +1490,7 @@ app.post('/reviewAdd', function (req, res) {
 
             if (err) {
                 throw err;
-                console.log(err)
+                // console.log(err)
             }
             else {
                 var queryString = 'SELECT ID FROM ey_review WHERE CREATOR_USER_ID=? ORDER BY ID DESC LIMIT 1';
@@ -1679,7 +1680,7 @@ app.post('/DeleteProductById/:productId', function (req, res) {
             return res.status(200).json({success: true});
         }
         else {
-            return res.json({err: err1.message});
+            return res.json({err: err.message});
         }
     });
 });
@@ -1700,7 +1701,7 @@ app.post('/RestoreProductById/:productId', function (req, res) {
             return res.status(200).json({success: true});
         }
         else {
-            return res.json({err: err1.message});
+            return res.json({err: err.message});
         }
     });
 });
@@ -2211,6 +2212,27 @@ app.get('/reset/:token', function (req, res, next) {
 });
 
 
+app.get('/test', function (req, res, next) {
+
+    var queryString = 'select * from equipment';
+
+
+    connection.query(queryString,  function (err, user) {
+           console.log('Increased the salary for Joe.'+ err);
+        if (err)  return res.end(err +'Success! Your password has been changed!');
+        // return next(err);
+        if (user.length === 0) {
+
+            res.status(400);
+            
+                     return res.end(err);
+        }
+           res.status(200);
+        return  res.json({success: 200, message: user[0]});
+
+    });
+});
+
 //////RESET-Password/////
 
 app.post('/reset/:token', function (req, res) {
@@ -2665,8 +2687,7 @@ app.use(function(req, res) {
 });
 
 
-var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
 
 
 app.listen(port, ip);
