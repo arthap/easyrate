@@ -785,12 +785,10 @@ app.post('/AddFollowProduct', function (req, res, next) {
                     if (!error) {
                         console.log('Increased the salary for Joe.');
                         return res.json({sucsess: true, err_desc: error});
-                        next();
-                    }
+                      }
                     else {
-
-                        console.log(error)
-
+                        console.log(error);
+                         next();
                         // var succes = true;
                     }
                 });
@@ -1971,13 +1969,13 @@ app.post('/PostProductReviewById/', function (req, res) {
     connection.query('INSERT INTO ey_review (PRODUCT_ID, REVIEW_CAPTION, REVIEW_TEXT, LIKES_CNT, DISLIKE_CNT, CURRENT_RATE, CREATOR_USER_ID, STATUS, CREATED_AT, UPDATED_AT) VALUES(?,?,?,?,?,?,?,?,?,?)', values, function (err, result) {
 
         if (err) {
+                console.log(err)
             throw err;
-            console.log(err)
+        
         }
         else {
             return res.json({error_code: 0, err_desc: null});
-            console.log('Increased the salary for Joe.');
-            // var succes = true;
+                 // var succes = true;
 
         }
     });
@@ -2313,9 +2311,12 @@ app.post('/reset/:token', function (req, res) {
                     console.log(err);
                 }
                 else {
+                    
                     console.log('Message sent: ' + info.response);
-                    return res.end('Success! Your password has been changed!');
                     done(err);
+                    return res.end('Success! Your password has been changed!');
+                   
+                  
                 }
             });
             // var options = {
@@ -2489,6 +2490,7 @@ app.post('/api/usersCreate', function (req, res) {
 
 
 });
+
 app.post('/AddEULA/:id', function (req, res) {
 
     var id = req.params.id;
@@ -2503,21 +2505,6 @@ app.post('/AddEULA/:id', function (req, res) {
     });
 });
 
-// app.delete('/contactlist/:id', function (req, res) {
-//   var id = req.params.id;
-//   console.log( req.params.id);
-//   console.log(id);
-//   // connection.connect();
-//   connection.query('DELETE FROM ey_users WHERE id='+id, function(err, rows, fields) {
-//     if (!err){
-//       console.log('The solution is: ', rows);
-//       console.log( req.params.id)}
-//     else
-//       console.log('Error while performing Query.');
-//
-//   });
-//
-// });
 app.post('/userdelete/:user', function (req, res) {
     var user = req.params.user;
     console.log(req.params.user);
@@ -2533,32 +2520,7 @@ app.post('/userdelete/:user', function (req, res) {
     });
 
 });
-// app.get('/contactlist/:id', function (req, res) {
-//
-//   var id = req.params.id;
-//   console.log(id);
-//
-//   // connection.connect();
-//   connection.query( 'UPDATE labels SET color="Green" WHERE articleNumber='+id,  function(err, rows, fields) {
-//     //res.json('.. assume you translated your database response a javascript object yet again .. ')
-//     //connection.release();
-//   });
-// //connection.query('SELECT * from labels where articleNumber='+id, function(err, rows, fields) {
-//   //      if (!err){
-//   //         console.log('The solution is: ', rows);
-//   //         res.json(rows);
-//   //        }
-//
-//
-//   //  else
-//   //       console.log('Error while performing Query.');
-//   //connection.release();
-//   //  connection.end();
-//   // });
-// ////  db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
-// ////    res.json(doc);
-// ////  });
-// });
+
 app.post('/getDataUserById', function (req, res) {
     var key = req.body.id;
     var queryString = 'SELECT ID,AVATAR,USERNAME,CURRENT_RATE,EMAIL  FROM ey_users  WHERE  ID = ?';

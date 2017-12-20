@@ -72,8 +72,9 @@
 
               <a href="javascript:void(0)"  class="fa fa-bars">
                   <select id="mySelect"  ng-click="getCategoryLvL1()"  ng-model="selectedItem" ng-options="item as item.NAME for item in categoryLVL1" ></select></a>
-              <input type="text" name="search" ng-model="searchingText;" type="search" name="search" value="What are you looking for?" onBlur="if(this.value=='')this.value='What are you looking for?'" onFocus="if(this.value=='What are you looking for?')this.value='' ">
-              <span class="fa fa-search"  ng-click="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()"></span>
+              <input type="text" name="search" ng-model="searchingText;"ng-enter="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()" type="search" name="search" value="What are you looking for?" onBlur="if(this.value=='')this.value='What are you looking for?'" onFocus="if(this.value=='What are you looking for?')this.value='' ">
+              <span class="fa fa-search"   ng-click="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()"></span>
+             
             </div>
           </div>
         </div>
