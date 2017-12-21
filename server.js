@@ -80,9 +80,9 @@ var connection = mysql.createConnection({
 });
 var pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
+    host: ip  || 'localhost',
+    user: 'newuser' || 'root',
+    password: 'password' || 'root',
     database: 'easytes'
     // host     :  '127.2.204.130',
     // user     : 'adminv5U5hn4',
