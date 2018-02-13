@@ -515,10 +515,10 @@ app.post('/GetProductReviewtById/:id', function (req, res, next) {
         " a.CURRENT_RATE,a.PRODUCT_ID,a.REVIEW_CAPTION,c.USERNAME,c.AVATAR,c.CURRENT_RATE AS USER_CURRENT_RATE,"+
         " GROUP_CONCAT(b.RESOURCE ORDER BY b.RESOURCE) AS ey_review_resource"+
         " FROM  ey_review a"+
-    " LEFT JOIN ey_review_resource b ON a.ID = b.REVIEW_ID " +
-    " LEFT JOIN ey_users c on c.ID = a.CREATOR_USER_ID where  a.PRODUCT_ID=?"+
-    " GROUP BY  a.ID,a.REVIEW_TEXT,a.LIKES_CNT,a.DISLIKE_CNT,a.CREATOR_USER_ID ,"+
-    " a.CURRENT_RATE,a.PRODUCT_ID,a.REVIEW_CAPTION" ;
+        " LEFT JOIN ey_review_resource b ON a.ID = b.REVIEW_ID " +
+        " LEFT JOIN ey_users c on c.ID = a.CREATOR_USER_ID where  a.PRODUCT_ID=?"+
+        " GROUP BY  a.ID,a.REVIEW_TEXT,a.LIKES_CNT,a.DISLIKE_CNT,a.CREATOR_USER_ID ,"+
+        " a.CURRENT_RATE,a.PRODUCT_ID,a.REVIEW_CAPTION" ;
 
     var key = req.params.id;
     var queryString = 'SELECT * FROM ey_review  WHERE  PRODUCT_ID = ?';
@@ -1147,8 +1147,8 @@ app.post('/AddLike', function (req, res, next) {
     var like = req.body.like;
     var dislike = req.body.dislike
     var activType = 4;
-    var comment = "aaaaaaaaaaaa";
-    var actLink = "/dsfsdfs/fsd/fsdgfsdf";
+    var comment = "user  liked this product";
+    var actLink = "/AddLike";
     var prodId = req.body.productId;
     var updateRecord = 'UPDATE ey_review SET LIKES_CNT = ' + like + ', DISLIKE_CNT = ' + dislike + ' WHERE ID=?';
 
@@ -1166,7 +1166,7 @@ app.post('/AddLike', function (req, res, next) {
                     // console.log('Increased the salary for Joe.');
                 }
                 else {
-                    console.log('Error while performing Query. add error');
+                    console.log('Error while performing Query. add error'+error);
                 }
             });
 
@@ -1238,8 +1238,8 @@ app.post('/AddDisLike', function (req, res, next) {
     var updateRecord = 'UPDATE ey_review SET DISLIKE_CNT = ' + dislike + ',LIKES_CNT = ' + like + '  WHERE ID=?';
     // var updateRecord2 = 'UPDATE ey_review SET LIKES_CNT = '+like+' WHERE ID=?';
     var activType = 5;
-    var comment = "aaaaaaaaaaaa";
-    var actLink = "/dsfsdfs/fsd/fsdgfsdf";
+    var comment = "user added dislike";
+    var actLink = "/AddDisLike";
     var values = [userId, activType, comment, actLink, prodId, key, 0, new Date(), new Date(), new Date()];
     connection.query(updateRecord, [key], function (err, result) {
         if (err) throw err;
@@ -1250,7 +1250,7 @@ app.post('/AddDisLike', function (req, res, next) {
                     // console.log('Increased the salary for Joe.');
                 }
                 else {
-                    console.log('Error while performing Query. add error');
+                    console.log('Error while performing Query. add error'+ error);
                 }
             });
         }

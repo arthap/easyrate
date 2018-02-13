@@ -1,4 +1,4 @@
- easyrateApp.controller('ProductDetailCtrl', [
+easyrateApp.controller('ProductDetailCtrl', [
     '$scope', '$http', '$location','$window', '$routeParams', 'Product', 'UserService', 'UserDataService', '$rootScope', '$cookieStore', 'Upload',
     function ($scope, $http, $location,$window, $routeParams, Product, UserService, UserDataService, $rootScope, $cookieStore, Upload) {
         $scope.productId = $routeParams.productId;
@@ -8,14 +8,15 @@
         vm.followProduct = followProduct;
         // vm.rating=rating;
         var userId;
+        $scope.index;
+        $scope.ind;
+        $scope.slideShow = false;
+        
         $rootScope.userData = $cookieStore.get('userData') || {};
         if ($rootScope.userData.currentUser) {
             vm.user = $rootScope.userData.currentUser
             userId = vm.user.ID
         }
-        $scope.index;
-        $scope.ind;
-        $scope.slideShow = false;
         $scope.slShow = function (index) {
             $scope.index = index;
             $scope.ind = $scope.index;
@@ -90,9 +91,8 @@
             if ($scope.index === ind) {
                 return $scope.currentIndex === index;
             }
-            else {
-                return false;
-            }
+            return false;
+            
         };
 
         $scope.prevSlide = function () {
@@ -122,16 +122,9 @@
         // }
 ///////////////////////////image review upload start/////////////
         $scope.imageErrorChk = function () {
-            if ($scope.files === undefined) {
+            $scope.imgError = false
+            if ($scope.files === undefined || $scope.files.length === 0) {
                 $scope.imgError = true;
-            }
-            else {
-                if ($scope.files.length === 0) {
-                    $scope.imgError = true;
-                }
-                else {
-                    $scope.imgError = false;
-                }
             }
         }
         var files = [];
@@ -275,9 +268,8 @@
                     }, this);
                 }, this);
             }
-            // $scope.likeDisLikeType[ind]={userTYPE:userTYPE,reviewId:reviewId,};
-            // console.log(i + $scope.likeDisLikeT);
         }
+        
         function reviewData() {
             UserService.GetProductReviewtById($routeParams.productId)
                 .then(function (productReviewById) {
@@ -307,9 +299,8 @@
         $scope.like = function (reviewId, like, dislike) {
             UserService.AddLike(reviewId, userId, $routeParams.productId, like, dislike)
                 .then(function (req) {
-
                     if (req) {
-                        reviewData();
+                        vm.reviewData();
                         // $scope.userAct();
                         // $scope.mainReviewImageUrl =  $scope.getProductDetaiReviewList[0].RESOURCE;
                     } else {
@@ -320,21 +311,16 @@
         $scope.disLike = function (reviewId, like, dislike) {
             UserService.AddDisLike(reviewId, userId, $routeParams.productId, like, dislike)
                 .then(function (req) {
-
                     if (req) {
-                        reviewData();
-                        // $scope.userAct();
-                        // $scope.mainReviewImageUrl =  $scope.getProductDetaiReviewList[0].RESOURCE;
-                    } else {
-
-                    }
+                        vm.reviewData();
+                    }  
                 });
         }
 
 
         $scope.writeLikeDislakePermitions = function (likeDislike, detailId, like, dislike, likeDislikeType) {
             if (userId === undefined) {
-                $location.path('/signIn');
+                $location.path('/login');
             }
             else {
                 if (likeDislike === 1) {
@@ -353,7 +339,7 @@
         }
         $scope.abstain = function (likeDislike, detailId, like, dislike) {
             if (userId === undefined) {
-                $location.path('/signIn');
+                $location.path('/login');
             }
             else {
                 if (likeDislike === 5) {
@@ -363,7 +349,6 @@
 
                             if (req) {
                                 reviewData();
-
                             }
                         });
                 }
@@ -450,20 +435,7 @@
                             if (reg.sucsess === true) {
                                 // $scope.mainReviewImageUrl =  $scope.getProductDetaiReviewList[0].RESOURCE;
                             }
-                            // else {
-                            //
-                            // 	UserService.AddFollowProduct(userId, $routeParams.productId, 4)
-                            // 		.then(function (reg) {
-                            //
-                            // 			if (reg.sucsess === true) {
-                            //
-                            // 				// $scope.mainReviewImageUrl =  $scope.getProductDetaiReviewList[0].RESOURCE;
-                            // 			} else {
-                            //
-                            // 			}
-                            // 		});
-                            // }
-                        });
+                            });
                 }
             });
         }
@@ -471,21 +443,7 @@
 
         vm.like = 0;
         vm.disLike = 0;
-        // vm.submit = function () {
-        // 	Upload.upload({
-        // 		url: '/api/photo',
-        // 		data: {id: vm.userData.ID,file: vm.file }
-        // 	}).then(function (resp) {
-        // 		console.log('Success ' + resp );
-        // 		login();
-        // 	}, function (resp) {
-        // 		console.log('Error status: ' + resp );
-        // 	}, function (evt) {
-        // 		vm.progress = parseInt(100.0 * evt.loaded / evt.total+'%');
-        // 		// console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        // 	});
-        // };
-        //
+   
         function reviewDiscription() {
             $scope.userData = UserDataService.getUserData();
             if ($scope.userData !== undefined) {
@@ -495,9 +453,6 @@
                 .then(function (reviewAdd) {
                     if (reviewAdd.success === true) {
                         vm.reviewData();
-                        // reviewData();
-                        // $scope.getProductDetaiImagelList = productImageById;
-                        // $scope.mainImageUrl = $scope.getProductDetaiImagelList[0].RESOURCE;
                     } else {
                         $location.path('/signIn');
                     }

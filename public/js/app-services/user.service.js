@@ -75,8 +75,8 @@
                 console.log(respond);
             }, function (error) {
                 // if an error
+                 console.error(error);
                 deferred.resolve({success: false, message: error.data});
-                console.error(error);
             });
             return deferred.promise;
         }
@@ -95,9 +95,9 @@
                 console.log(respond);
             }, function (error) {
                 // if an error
+                 console.error(error);
                 deferred.resolve({success: false, message: error.data});
-                console.error(error);
-            });
+                });
             return deferred.promise;
         }
         function GetCategoryLvL1() {
