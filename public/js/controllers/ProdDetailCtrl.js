@@ -91,7 +91,7 @@ easyrateApp.controller('ProductDetailCtrl', [
             if ($scope.index === ind) {
                 return $scope.currentIndex === index;
             }
-            return false;
+                return false;
             
         };
 
@@ -122,9 +122,16 @@ easyrateApp.controller('ProductDetailCtrl', [
         // }
 ///////////////////////////image review upload start/////////////
         $scope.imageErrorChk = function () {
-            $scope.imgError = false
-            if ($scope.files === undefined || $scope.files.length === 0) {
+            if ($scope.files === undefined) {
                 $scope.imgError = true;
+            }
+            else {
+                if ($scope.files.length === 0) {
+                    $scope.imgError = true;
+                }
+                else {
+                    $scope.imgError = false;
+                }
             }
         }
         var files = [];
