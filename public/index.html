@@ -22,8 +22,8 @@
 		
     <link rel="stylesheet" href="js/components/bootstrap-3.3.6/dist/css/bootstrap.css">
 
-		<!-- <link rel="stylesheet/less" type="text/css" href="less/template.less" /> -->
-		<!-- <script type="text/javascript" src="js/less.min.js"></script> -->
+		 <link rel="stylesheet/less" type="text/css" href="less/template.less" /> 
+		 <script type="text/javascript" src="js/less.min.js"></script> 
 
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/perfect-scrollbar.jquery.js"></script>
@@ -69,8 +69,8 @@
           <div class="container">
             <div class="search-block">
 
-              <a href="javascript:void(0)"  class="fa fa-bars">
-                  <select id="mySelect"  ng-click="getCategoryLvL1()"  ng-model="selectedItem" ng-options="item as item.NAME for item in categoryLVL1" ></select></a>
+              <a href="javascript:void(0)"  class="fa fa-bars"></a>
+                  <select id="mySelect"  ng-click="getCategoryLvL1()"  ng-model="selectedItem" ng-options="item as item.NAME for item in categoryLVL1" ></select>
               <input type="text" name="search" ng-model="searchingText;"ng-enter="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()" type="search" name="search" value="What are you looking for?" onBlur="if(this.value=='')this.value='What are you looking for?'" onFocus="if(this.value=='What are you looking for?')this.value='' ">
               <span class="fa fa-search"   ng-click="searching(searchingText,0,0,selectedItem.ID);mainPageEnable()"></span>
              
