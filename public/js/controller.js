@@ -170,9 +170,9 @@ easyrateApp.run(['$rootScope', '$location', '$cookieStore', '$http',
 
             var loggedIn = $rootScope.globals.currentUser;
             // var userData= $rootScope.userData.currentUser;
-            if (restrictedPage && !loggedIn) {
-                $location.path('/');
-            }
+            // if (restrictedPage && !loggedIn) {
+            //     $location.path('/');
+            // }
             // if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
             //     $location.path('/login');
             // }
